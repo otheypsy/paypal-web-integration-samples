@@ -1,0 +1,115 @@
+{
+    "middleware": {
+
+        "compress": {
+            "enabled" : true,
+            "priority": 20,
+            "module": "compression"
+        },
+
+        "logger": {
+            "enabled" : true,
+            "priority": 30,
+            "module": {
+                "name": "morgan",
+                "arguments": [
+                    "-- Incoming -- [:date[web]] \n   API: :method - :url HTTP/:http-version \n   Referrer: :referrer \n   User-Agent: :user-agent \n",
+                    {
+                        "immediate": true
+                    }
+                ]
+            }
+        },
+
+        "favicon": {
+            "enabled": true,
+            "priority": 40,
+            "module": {
+                "name": "serve-favicon",
+                "arguments": [ "path:../client/build/favicon.ico" ]
+            }
+        },
+
+        "static": {
+            "priority": 50,
+            "module": {
+                "arguments": [ "path:../client/build" ]
+            }
+        },
+
+
+
+        "json": {
+            "enabled" : true,
+            "priority": 60,
+            "module": {
+                "name": "body-parser",
+                "method": "json"
+            }
+        },
+
+        "urlencoded": {
+            "enabled" : true,
+            "priority": 70,
+            "module": {
+                "name": "body-parser",
+                "method": "urlencoded"
+            }
+        },
+
+        "session": {
+            "enabled" : true,
+            "priority": 80,
+            "module": {
+                "arguments": [
+                    {
+                        "key": "b2Rlc2FpQHBheXBhbC5jb20=",
+                        "secret": "bXRzLWhlbHBlcg==",
+                        "cookie": {
+                            "path": "/",
+                            "httpOnly": true,
+                            "maxAge": null
+                        },
+                        "resave": true,
+                        "saveUninitialized": true,
+                        "proxy": null
+                    }
+                ]
+            }
+        },
+
+        "appsec": {
+            "enabled" : true,
+            "priority": 90,
+            "module": {
+                "name": "lusca",
+                "arguments": [
+                    {
+                        "csrf": false,
+                        "xframe": "SAMEORIGIN",
+                        "p3p": false,
+                        "csp": false
+                    }
+                ]
+            }
+        },
+
+        "router" : {
+            "enabled" : true,
+            "priority": 100,
+            "module": "path:./middleware/router"
+        },
+
+        "success": {
+            "enabled" : true,
+            "priority": 110,
+            "module": "path:./middleware/success"
+        },
+
+        "error": {
+            "enabled" : true,
+            "priority": 120,
+            "module": "path:./middleware/error"
+        }
+    }
+}

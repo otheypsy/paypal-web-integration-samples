@@ -1,0 +1,15 @@
+@import '../../../scss/constants';
+
+.item {
+    cursor: pointer;
+    outline: none;
+}
+
+.link {
+    padding-bottom: 4px;
+    border-bottom: 1px dashed transparent;
+}
+
+.active {
+    border-bottom: 1px dashed;
+}

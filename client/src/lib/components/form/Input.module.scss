@@ -1,0 +1,17 @@
+@import '../../scss/constants';
+
+.label {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: $--color-4;
+}
+
+.input {
+    font-weight: 300;
+    color: $--color-5;
+    &:focus {
+        border-color: $--color-1;
+        box-shadow: none;
+    }
+}
+

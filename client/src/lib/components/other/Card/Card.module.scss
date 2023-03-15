@@ -1,0 +1,23 @@
+@import '../../../scss/constants';
+
+.card {
+    margin: {
+        bottom: 1rem
+    };
+}
+
+.title {
+    padding: {
+        bottom: 0.2rem;
+    }
+    color: $--color-5;
+}
+
+.subTitle {
+    padding: {
+        left: 0.2rem;
+        bottom: 0.5rem;
+    }
+    font-weight: 400;
+    color: $--color-4;
+}

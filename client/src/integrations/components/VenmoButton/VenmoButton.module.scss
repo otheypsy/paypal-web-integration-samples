@@ -1,0 +1,16 @@
+.logo {
+    display: inline-block;
+    cursor: pointer;
+    min-width: 250px;
+    min-height: 50px;
+    background-image: url('./venmo_button_default.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 5px;
+}
+
+.logo:hover,
+.logo:active {
+    background-image: url('venmo_button_active.svg');
+}

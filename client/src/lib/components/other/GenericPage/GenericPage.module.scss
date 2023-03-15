@@ -1,0 +1,54 @@
+@import '../../../scss/constants';
+
+@mixin transition {
+    @for $i from 1 through 5 {
+        &:nth-child(#{$i}) {
+            animation-delay: #{$i}s;
+        }
+    }
+}
+
+.images {
+    display: flex;
+    margin: 100px auto;
+    max-width: 1000px;
+    img {
+        max-height: 100px;
+        display: inline-block;
+        margin: auto;
+        opacity: 0;
+        -moz-animation: blink normal 4s infinite ease-in-out;
+        -webkit-animation: blink normal 4s infinite ease-in-out;
+        animation: blink normal 4s infinite ease-in-out;
+        @include transition;
+    }
+}
+
+.container {
+    color: $--color-4;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.details {
+    padding-top: 1rem;
+    font-weight: 400;
+}
+
+@-moz-keyframes blink {
+    0% { opacity: 0; }
+    25% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@-webkit-keyframes blink {
+    0% { opacity:0; }
+    25% { opacity:1; }
+    50% { opacity: 0; }
+}
+
+@keyframes blink {
+    0% { opacity:0; }
+    25% { opacity:1; }
+    50% { opacity: 0; }
+}
