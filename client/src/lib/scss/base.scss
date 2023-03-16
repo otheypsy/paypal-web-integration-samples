@@ -1,0 +1,20 @@
+@import 'bootstrap/scss/bootstrap';
+@import 'constants';
+@import 'fonts';
+
+html,
+body {
+    color: $--color-5;
+    height: 100%;
+    min-height: 100%;
+    font-family: PayPalOpen-Regular, sans-serif;
+    font-weight: 400;
+    overflow-wrap: break-word;
+}
+
+.btn {
+    font-size: 1.1rem;
+    &:focus {
+        box-shadow: none;
+    }
+}

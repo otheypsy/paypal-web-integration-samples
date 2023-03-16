@@ -1,0 +1,92 @@
+{
+    "name": "web-integration-samples",
+    "license": "UNLICENSED",
+    "version": "0.1.0",
+    "description": "Platform to implement PayPal products and services.",
+    "homepage": "https://github.paypal.com/odesai/web-integration-samples#README",
+    "author": {
+        "name": "Omkar Desai",
+        "email": "odesai@paypal.com"
+    },
+    "main": "/server/server.js",
+    "type": "module",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.paypal.com/odesai/web-integration-samples.git"
+    },
+    "scripts": {
+        "audit": "npm i --package-lock-only && npm audit fix && del package-lock.json",
+        "lint": "stylelint \"client/src/{**/*,*}.{css,scss}\"  & eslint . --ext .js,.jsx,.ts,.tsx",
+        "lintServer": "eslint ./server --ext .js,.jsx,.ts,.tsx",
+        "lintClient": "stylelint \"client/src/{**/*,*}.{css,scss}\" & eslint ./client --ext .js,.jsx,.ts,.tsx",
+        "startServer": "nodemon server/server.js",
+        "startClient": "vite serve client",
+        "buildClient": "vite build client"
+    },
+    "dependencies": {
+        "@popperjs/core": "^2.8.4",
+        "@types/node": "^18.11.18",
+        "body-parser": "^1.20.2",
+        "bootstrap": "^5.2.2",
+        "braintree": "^3.0.0",
+        "braintree-web": "^3.69.0",
+        "braintree-web-drop-in": "^1.23.0",
+        "chalk": "^5.2.0",
+        "compression": "^1.7.4",
+        "construx": "^1.0.0",
+        "construx-copier": "^1.0.0",
+        "debug": "^4.3.4",
+        "dotenv": "^8.1.0",
+        "errorhandler": "^1.5.1",
+        "express": "^5.0.0-beta.1",
+        "graphql": "^16.3.0",
+        "graphql-request": "^4.2.0",
+        "helmet": "^6.0.1",
+        "method-override": "^3.0.0",
+        "morgan": "^1.10.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-json-view": "^1.21.3",
+        "react-router-dom": "^6.4.2",
+        "recoil": "^0.7.6",
+        "sass": "^1.50.0",
+        "serve-favicon": "^2.5.0",
+        "serve-index": "^1.9.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.21.0",
+        "@babel/eslint-parser": "^7.19.1",
+        "@babel/plugin-syntax-import-assertions": "^7.20.0",
+        "@vitejs/plugin-react": "^3.1.0",
+        "eslint": "^8.34.0",
+        "eslint-config-airbnb-base": "latest",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-jsx-a11y": "^6.6.1",
+        "eslint-plugin-prettier": "^4.2.1",
+        "eslint-plugin-react": "^7.31.11",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "nodemon": "^2.0.20",
+        "postcss": "^8.4.21",
+        "prettier": "2.8.4",
+        "prop-types": "^15.8.1",
+        "stylelint": "^15.2.0",
+        "stylelint-config-prettier-scss": "^0.0.1",
+        "stylelint-config-recommended-scss": "^8.0.0",
+        "stylelint-scss": "^4.3.0",
+        "supports-color": "^9.3.1",
+        "vite": "^4.0.3",
+        "vite-plugin-eslint": "^1.8.1",
+        "vite-plugin-svgr": "^2.2.2"
+    },
+    "engines": {
+        "node": ">= 16.14.2",
+        "npm": ">= 8.5.0"
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
+    ],
+    "packageManager": "yarn@3.4.1"
+}
