@@ -43,5 +43,5 @@ jobs:
         script: |
           cd ~/paypal-web-integration-samples
           git pull origin main
-          yarn install --production
+          yarn --immutable
           pm2 restart node-app

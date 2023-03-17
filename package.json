@@ -21,7 +21,8 @@
         "lintClient": "stylelint \"client/src/{**/*,*}.{css,scss}\" & eslint ./client --ext .js,.jsx,.ts,.tsx",
         "startServer": "nodemon server/server.js",
         "startClient": "vite serve client",
-        "buildClient": "vite build client"
+        "buildClient": "vite build client",
+        "test": "echo Tests go here"
     },
     "dependencies": {
         "@popperjs/core": "^2.8.4",
