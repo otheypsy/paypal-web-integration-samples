@@ -1,5 +1,5 @@
 {
-    "name": "web-integration-samples",
+    "name": "paypal-web-integration-samples",
     "license": "UNLICENSED",
     "version": "0.1.0",
     "description": "Platform to implement PayPal products and services.",
@@ -19,9 +19,11 @@
         "lint": "stylelint \"client/src/{**/*,*}.{css,scss}\"  & eslint . --ext .js,.jsx,.ts,.tsx",
         "lintServer": "eslint ./server --ext .js,.jsx,.ts,.tsx",
         "lintClient": "stylelint \"client/src/{**/*,*}.{css,scss}\" & eslint ./client --ext .js,.jsx,.ts,.tsx",
+        "start": "node server/server.js",
         "startServer": "nodemon server/server.js",
         "startClient": "vite serve client",
-        "buildClient": "vite build client"
+        "buildClient": "vite build client",
+        "test": "echo Tests go here"
     },
     "dependencies": {
         "@popperjs/core": "^2.8.4",
@@ -87,6 +89,5 @@
         "> 1%",
         "last 2 versions",
         "not ie <= 8"
-    ],
-    "packageManager": "yarn@3.4.1"
+    ]
 }
