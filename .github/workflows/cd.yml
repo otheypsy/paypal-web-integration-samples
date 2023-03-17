@@ -23,7 +23,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install and Test
         run: |
-          yarn --immutable
+          yarn install
           yarn test
         env:
           CI: true
@@ -43,5 +43,5 @@ jobs:
         script: |
           cd ~/paypal-web-integration-samples
           git pull origin main
-          yarn --immutable
-          pm2 restart node-app
+          yarn install --production
+          pm2 restart paypal-web-integration-samples

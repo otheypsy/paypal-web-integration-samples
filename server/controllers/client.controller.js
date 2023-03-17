@@ -1,5 +1,12 @@
 import express from 'express'
+import { resolve } from 'path'
 
-const client = express.static('client/build')
+const assets = express.static('client/build')
 
-export default client
+const client = (req, res) => {
+    res.sendFile('index.html', {
+        root: resolve('./client/build'),
+    })
+}
+
+export { client, assets }

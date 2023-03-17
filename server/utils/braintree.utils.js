@@ -28,26 +28,8 @@ const base64 = {
     encode: (string) => Buffer.from(string).toString('base64'),
 }
 
-const sdkMerchantId = async () => {
-    if (bt.sdk) {
-        const response = await bt.sdk.graphQLClient.query(viewerQuery)
-        return response.data.viewer.merchant.id
-    }
-    throw new InternalServerErrorError('Braintree SDK check failed')
-}
-
-const gqlMerchantId = async () => {
-    if (bt.gql) {
-        const response = await bt.gql.request(viewerQuery)
-        return response.viewer.merchant.id
-    }
-    throw new InternalServerErrorError('Braintree GQL check failed')
-}
-
 const setupSDK = async () => {
     log('Setting up SDK')
-    if (!process.env.BT_MERCHANT_ID || !process.env.BT_PUBLIC_KEY || !process.env.BT_PRIVATE_KEY)
-        throw new InternalServerErrorError('Braintree environment variables not set')
 
     try {
         bt.sdk = new braintree.BraintreeGateway({
@@ -57,27 +39,24 @@ const setupSDK = async () => {
             privateKey: process.env.BT_PRIVATE_KEY,
         })
 
-        const merchantId = await sdkMerchantId()
+        const { merchantId } = bt.sdk.config
         success(`Braintree SDK initialized with merchant ID ${merchantId}`)
-    } catch (err) {
-        error('Braintree Utils `setupSDK` failed', err)
+    } catch (e) {
+        error('Failed to setup SDK instance', e)
     }
 }
 
 const setupGQL = async () => {
-    if (!process.env.BT_MERCHANT_ID || !process.env.BT_PUBLIC_KEY || !process.env.BT_PRIVATE_KEY)
-        throw new InternalServerErrorError('Braintree environment variables not set')
-
-    const today = new Date()
-    const dd = String(today.getDate()).padStart(2, '0')
-    const mm = String(today.getMonth() + 1).padStart(2, '0')
-    const yyyy = String(today.getFullYear())
-    const btVersion = `${yyyy}-${mm}-${dd}`
-
-    const endpoint = 'https://payments.sandbox.braintree-api.com/graphql'
-    const auth = `${process.env.BT_PUBLIC_KEY}:${process.env.BT_PRIVATE_KEY}`
-
     try {
+        const today = new Date()
+        const dd = String(today.getDate()).padStart(2, '0')
+        const mm = String(today.getMonth() + 1).padStart(2, '0')
+        const yyyy = String(today.getFullYear())
+        const btVersion = `${yyyy}-${mm}-${dd}`
+
+        const endpoint = 'https://payments.sandbox.braintree-api.com/graphql'
+        const auth = `${process.env.BT_PUBLIC_KEY}:${process.env.BT_PRIVATE_KEY}`
+
         bt.gql = new GraphQLClient(endpoint, {
             headers: {
                 authorization: `Bearer ${base64.encode(auth)}`,
@@ -85,10 +64,11 @@ const setupGQL = async () => {
             },
         })
 
-        const merchantId = await gqlMerchantId()
+        const response = await bt.gql.request(viewerQuery)
+        const merchantId = response.viewer.merchant.id
         success(`Braintree GQL initialized with merchant ID ${merchantId}`)
-    } catch (err) {
-        error('Braintree Utils `setupGQL` failed', err)
+    } catch (e) {
+        error('Failed to setup GQL instance', e)
     }
 }
 

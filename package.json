@@ -12,7 +12,7 @@
     "type": "module",
     "repository": {
         "type": "git",
-        "url": "git+https://github.paypal.com/odesai/web-integration-samples.git"
+        "url": "git+https://github.com/otheypsy/paypal-web-integration-samples.git"
     },
     "scripts": {
         "audit": "npm i --package-lock-only && npm audit fix && del package-lock.json",
