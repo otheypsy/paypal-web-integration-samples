@@ -5,7 +5,6 @@ import testbedRouter from './testbed.router.js'
 import notFoundMiddleware from '../middleware/notFound.middleware.js'
 import responderMiddleware from '../middleware/responder.middleware.js'
 import errorMiddleware from '../middleware/error.middleware.js'
-import { resolve } from 'path'
 
 const router = express.Router()
 
