@@ -36,20 +36,12 @@ jobs:
     runs-on: digitalocean
 
     steps:
-    - name: Checkout Branch
-      uses: actions/checkout@v3
-    
-    - name: Setup Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-    
-    - name: Deploy Node App
-      run: |
-          cd ~/paypal-web-integration-samples
-          git pull origin main
-          yarn install --production
-          yarn buildClient
+        - name: Deploy Node App
+          run: |
+            cd ~/paypal-web-integration-samples
+            git pull origin main
+            yarn install --production
+            yarn buildClient
 
-    - name: Restart PM2
-      run: pm2 start ecosystem.config.cjs
+        - name: Restart PM2
+          run: pm2 start ~/paypal-web-integration-samples/ecosystem.config.cjs
