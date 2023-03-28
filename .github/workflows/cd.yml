@@ -1,4 +1,4 @@
-name: Continuous Deployment through Github
+name: Continuous Deployment
 
 on:
   push:
