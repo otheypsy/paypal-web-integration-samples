@@ -44,10 +44,7 @@ jobs:
             key: ${{ secrets.SSH_KEY }}
             port: ${{ secrets.SSH_PORT }}
             script: |
-              cd ~/paypal-web-integration-samples
-              git pull origin main
-              yarn install --production
-              pm2 start ~/paypal-web-integration-samples/ecosystem.config.cjs
-
-        - name: Restart PM2
-          run: pm2 start ~/paypal-web-integration-samples/ecosystem.config.cjs
+              cd ~/node-github-demo
+              git pull origin master
+              npm install --production
+              pm2 restart node-app
