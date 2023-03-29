@@ -47,7 +47,6 @@ jobs:
               export PATH="$PATH:/home/odesai/.nvm/versions/node/v18.15.0/bin/yarn:/home/odesai/.nvm/versions/node/v18.15.0/bin/yarn"
               export PATH="$PATH:/home/odesai/.nvm/versions/node/v18.15.0/bin/pm2:/home/odesai/.nvm/versions/node/v18.15.0/bin/pm2"
               cd ~/paypal-web-integration-samples
-              ./deploy.sh
               git pull origin main
               yarn install --production
               pm2 start ecosystem.config.cjs
