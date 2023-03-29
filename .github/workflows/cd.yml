@@ -44,7 +44,7 @@ jobs:
             key: ${{ secrets.SSH_KEY }}
             port: ${{ secrets.SSH_PORT }}
             script: |
-              cd ~/node-github-demo
+              cd ~/paypal-web-integration-samples
               git pull origin master
               npm install --production
               pm2 restart node-app
