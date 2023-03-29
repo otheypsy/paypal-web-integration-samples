@@ -33,15 +33,21 @@ jobs:
 
   deploy:
     needs: [test]
-    runs-on: digitalocean
+    runs-on: ubuntu-latest
 
     steps:
         - name: Deploy Node App
-          run: |
-            cd ~/paypal-web-integration-samples
-            git pull origin main
-            yarn install --production
-            yarn buildClient
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.SSH_HOST }}
+            username: ${{ secrets.SSH_USERNAME }}
+            key: ${{ secrets.SSH_KEY }}
+            port: ${{ secrets.SSH_PORT }}
+            script: |
+              cd ~/paypal-web-integration-samples
+              git pull origin main
+              yarn install --production
+              pm2 start ~/paypal-web-integration-samples/ecosystem.config.cjs
 
         - name: Restart PM2
           run: pm2 start ~/paypal-web-integration-samples/ecosystem.config.cjs
