@@ -44,8 +44,8 @@ jobs:
             key: ${{ secrets.SSH_KEY }}
             port: ${{ secrets.SSH_PORT }}
             script: |
-              export PATH="$PATH:/home/odesai/.nvm/versions/node/v18.15.0/bin/yarn:/home/odesai/.nvm/versions/node/v18.15.0/bin/yarn"
-              export PATH="$PATH:/home/odesai/.nvm/versions/node/v18.15.0/bin/pm2:/home/odesai/.nvm/versions/node/v18.15.0/bin/pm2"
+              export NVM_DIR=~/.nvm
+              source ~/.nvm/nvm.sh
               cd ~/paypal-web-integration-samples
               git pull origin main
               yarn install --production
