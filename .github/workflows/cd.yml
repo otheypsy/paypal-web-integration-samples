@@ -1,4 +1,4 @@
-name: Continuous Deployment through Github
+name: Continuous Deployment
 
 on:
   push:
@@ -16,11 +16,14 @@ jobs:
         node-version: [18.x]
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Branch
+        uses: actions/checkout@v3
+      
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: Install and Test
         run: |
           yarn install
@@ -33,15 +36,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: SSH and deploy node app
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        script: |
-          cd ~/paypal-web-integration-samples
-          git pull origin main
-          yarn install --production
-          pm2 restart paypal-web-integration-samples
+        - name: Deploy Node App
+          uses: appleboy/ssh-action@master
+          with:
+            host: ${{ secrets.SSH_HOST }}
+            username: ${{ secrets.SSH_USERNAME }}
+            key: ${{ secrets.SSH_KEY }}
+            port: ${{ secrets.SSH_PORT }}
+            script: |
+              export NVM_DIR=~/.nvm
+              source ~/.nvm/nvm.sh
+              cd ~/paypal-web-integration-samples
+              git pull origin main
+              yarn install --production
+              pm2 start ecosystem.config.cjs
