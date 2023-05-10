@@ -1,34 +1,32 @@
-import ApiService from '../../../services/ApiService';
-import { logger } from '../../../services/AppService';
-import BTClient from "braintree-web/client";
-import BTPayPalCheckout from "braintree-web/paypal-checkout";
-import BTUSBankAccount from "braintree-web/us-bank-account";
-import XHRService from '../../../services/XHRService';
+import BTClient from 'braintree-web/client'
+import BTPayPalCheckout from 'braintree-web/paypal-checkout'
+import BTUSBankAccount from 'braintree-web/us-bank-account'
+import createLoggers from '../../../../utils/logger.utils'
+import { jsonRequest } from '../../../../utils/http.utils'
+
+const { error } = createLoggers('http.utils.jsx')
 
 const _clientMapping = {
     Client: BTClient,
     PayPalCheckout: BTPayPalCheckout,
-    USBankAccount: BTUSBankAccount
+    USBankAccount: BTUSBankAccount,
 }
 
 export const clientInterface = async (className, options) => {
-    try {
-        if (!Object.hasOwn(_clientMapping, className)) throw Error('Braintree client SDK class for ' + className + ' not setup')
-        _clientMapping[className].create(options);
+    if (!Object.hasOwn(_clientMapping, className)) {
+        error('Braintree client SDK class for ' + className + ' not setup')
+        return undefined
     }
-    catch (error) {
-        logger.error(error);
-        return undefined;
-    }
-};
+    _clientMapping[className].create(options)
+}
 
-export const serverInterface = async (resource, operation, args=[], params=[]) => {
-    const url = '/api/braintree/sdk/interface';
+export const serverInterface = async (resource, operation, args = [], params = []) => {
+    const url = '/api/braintree/sdk/interface'
     const postData = {
         resource: resource,
         operation: operation,
         args: args,
-        params: params
-    };
-    return await XHRService.post(url, postData);
+        params: params,
+    }
+    return await jsonRequest(url, 'POST', postData)
 }

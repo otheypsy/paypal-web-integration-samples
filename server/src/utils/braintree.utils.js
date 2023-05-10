@@ -1,6 +1,5 @@
 import braintree from 'braintree'
 import { GraphQLClient } from 'graphql-request'
-import InternalServerErrorError from './errors/internalServer.error.js'
 import createLoggers from './logger.utils.js'
 
 const { log, success, error } = createLoggers('braintree.utils.js')

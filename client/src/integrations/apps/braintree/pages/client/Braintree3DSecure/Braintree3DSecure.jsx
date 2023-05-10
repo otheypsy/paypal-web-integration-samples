@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
 import OutputJson from '../../../../../../lib/components/form/OutputJson/OutputJson.component'
-import AppService from '../../../../../services/AppService'
+import AppService from '../../../../../../services/app.service.jsx'
 import BraintreeService from '../../../services/BraintreeService'
 import { useAppContext } from '../../../../../context/AppContext'
 import { useOutputContext } from '../../../../../context/OutputContext'

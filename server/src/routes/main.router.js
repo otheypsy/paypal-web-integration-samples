@@ -10,10 +10,6 @@ const router = express.Router()
 
 // Pre-logic router-level middleware
 
-// React Front-End
-router.use(assets)
-router.get('(.*)', client)
-
 // API entry-point
 router.use('/api', (req, res, next) => {
     res.locals.response = {
@@ -31,6 +27,10 @@ router.use('/api', (req, res, next) => {
 router.use('/api/braintree', btRouter)
 // mainRouter.use('/api/paypal/rest', paypal)
 router.use('/api/testbed', testbedRouter)
+
+// React Front-End
+router.use(assets)
+router.get('(.*)', client)
 
 // Post-logic router-level middleware
 router.use(responderMiddleware)

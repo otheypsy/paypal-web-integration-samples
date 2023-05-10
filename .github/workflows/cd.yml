@@ -1,52 +1,31 @@
 name: Continuous Deployment
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    push:
+        branches:
+            - main
 
 jobs:
-  test:
+    test:
+        name: Test Application
+        uses: otheypsy/paypal-web-integration-samples/.github/workflows/cd.yml@main
 
-    runs-on: ubuntu-latest
+    deploy:
+        needs: [test]
+        runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x]
-
-    steps:
-      - name: Checkout Branch
-        uses: actions/checkout@v3
-      
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Install and Test
-        run: |
-          yarn install
-          yarn test
-        env:
-          CI: true
-
-  deploy:
-    needs: [test]
-    runs-on: ubuntu-latest
-
-    steps:
-        - name: Deploy Node App
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.SSH_HOST }}
-            username: ${{ secrets.SSH_USERNAME }}
-            key: ${{ secrets.SSH_KEY }}
-            port: ${{ secrets.SSH_PORT }}
-            script: |
-              export NVM_DIR=~/.nvm
-              source ~/.nvm/nvm.sh
-              cd ~/paypal-web-integration-samples
-              git pull origin main
-              yarn install --production
-              pm2 start ecosystem.config.cjs
+        steps:
+            - name: Deploy Node App
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.SSH_HOST }}
+                  username: ${{ secrets.SSH_USERNAME }}
+                  key: ${{ secrets.SSH_KEY }}
+                  port: ${{ secrets.SSH_PORT }}
+                  script: |
+                      export NVM_DIR=~/.nvm
+                      source ~/.nvm/nvm.sh
+                      cd ~/paypal-web-integration-samples
+                      git pull origin main
+                      yarn install --production
+                      pm2 start ecosystem.config.cjs
