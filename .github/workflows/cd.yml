@@ -11,6 +11,7 @@ jobs:
         uses: otheypsy/paypal-web-integration-samples/.github/workflows/ci.yml@main
 
     deploy:
+        name: Deploy Application
         needs: [test]
         runs-on: ubuntu-latest
 
