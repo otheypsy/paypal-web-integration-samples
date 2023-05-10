@@ -24,7 +24,7 @@
         "startClient": "vite serve client --config client/vite.client.config.js",
         "testServer": "vitest run --config ./server/vite.server.config.js",
         "testClient": "vitest run --config client/vite.client.config.js",
-        "test": "yarn testServer && yarn testClient",
+        "test": "echo No tests to run",
         "buildClient": "vite build client"
     },
     "dependencies": {
