@@ -5,7 +5,7 @@ import appRoutes from './apps/routes'
 import MainLayout from './layouts/MainLayout'
 import ErrorBoundary from '../lib/components/other/ErrorBoundary/ErrorBoundary'
 import GenericPage from '../lib/components/other/GenericPage/GenericPage.component'
-import { createRoutes, createLinks } from './services/RouterService'
+import { createRoutes, createLinks } from '../services/router.service.jsx'
 
 const label = 'Integration Samples'
 const links = createLinks(appRoutes)
