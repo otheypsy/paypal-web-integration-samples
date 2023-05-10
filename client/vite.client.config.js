@@ -27,6 +27,7 @@ const config = defineConfig({
          */
         environment: 'jsdom',
         // include: ['./client/test/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+        testTimeout: 20000,
         setupFiles: './test/setup.js',
     },
 

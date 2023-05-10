@@ -16,14 +16,15 @@
     },
     "scripts": {
         "audit": "npm i --package-lock-only && npm audit fix && del package-lock.json",
-        "lint": "stylelint \"client/src/{**/*,*}.{css,scss}\"  & eslint . --ext .js,.jsx,.ts,.tsx",
+        "lint": "eslint . --ext .js,.jsx,.ts,.tsx && stylelint \"client/src/{**/*,*}.{css,scss}\"",
         "lintServer": "eslint ./server --ext .js,.jsx,.ts,.tsx",
         "lintClient": "stylelint \"client/src/{**/*,*}.{css,scss}\" & eslint ./client --ext .js,.jsx,.ts,.tsx",
         "start": "node server/src/server.js",
         "startServer": "nodemon server/src/server.js",
         "startClient": "vite serve client --config client/vite.client.config.js",
-        "testServer": "vitest --config ./server/vite.server.config.js",
-        "testClient": "vitest --config client/vite.client.config.js",
+        "testServer": "vitest run --config ./server/vite.server.config.js",
+        "testClient": "vitest run --config client/vite.client.config.js",
+        "test": "yarn testServer && yarn testClient",
         "buildClient": "vite build client"
     },
     "dependencies": {
