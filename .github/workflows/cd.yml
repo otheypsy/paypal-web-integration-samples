@@ -1,7 +1,9 @@
 name: Continuous Deployment
 
 on:
-    push: main
+    push:
+        branches:
+            - main
 
 jobs:
     test:
