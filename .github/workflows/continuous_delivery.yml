@@ -1,0 +1,11 @@
+name: Continuous Delivery
+
+on:
+    pull_request:
+        branches:
+            -   main
+
+jobs:
+    test:
+        name: Test Application
+        uses: otheypsy/paypal-web-integration-samples/.github/workflows/test.yml@main

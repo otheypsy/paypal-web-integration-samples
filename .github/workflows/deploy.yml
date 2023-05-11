@@ -1,7 +1,17 @@
-name: Deploy to DigitalOcean
+name: Deploy Application
 
 on:
     workflow_call:
+        secrets:
+            SSH_HOST:
+                required: true
+            SSH_USERNAME:
+                required: true
+            SSH_KEY:
+                required: true
+            SSH_PORT:
+                required: true
+
 
 jobs:
 
