@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types'
-import BTClient from 'braintree-web/client'
 import withSDKOperations from '../../../../layouts/withSDKOperations'
-import { log, danger } from '../../../../../../services/LoggerService'
+import createLoggers from '../../../../../../../utils/logger.utils.jsx'
+import { clientInterface } from '../../../../services/BraintreeInterface'
 import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/BusyHooks'
 import { useSetError } from '../../../../../../states/Error/ErrorHooks'
 import { useAddOutput } from '../../../../../../states/Output/OutputHooks'
 import { useAddAppContext } from '../../../../../../states/AppContext/AppContextHooks'
+
+const { log, error } = createLoggers('ClientToken.component.jsx')
 
 const _operations = {
     clientCreate: {
@@ -29,14 +31,13 @@ const TokenizationKey = (props) => {
     const createClientInstance = async () => {
         addBusy()
         try {
-            console.log()
-            const clientInstance = await BTClient.create(props.operations.clientCreate.data.options)
+            const clientInstance = await clientInterface('Client', props.operations.clientCreate.data.options)
             log('TokenizationKey: createClientInstance', clientInstance)
             addOutput('ClientInstance', clientInstance)
             if (clientInstance) addAppContext('clientInstance', clientInstance)
-        } catch (error) {
+        } catch (e) {
             setError()
-            danger('TokenizationKey: createClientInstance', error)
+            error('TokenizationKey: createClientInstance', e)
         }
         removeBusy()
     }

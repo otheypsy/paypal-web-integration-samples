@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy } from 'react'
 
 const routes = [
     {
@@ -9,21 +9,18 @@ const routes = [
             {
                 path: 'client-token',
                 label: 'Client Token',
-                element: lazy(() => import('./sections/ClientToken'))
+                element: lazy(() => import('./sections/ClientToken.component')),
             },
             {
                 path: 'tokenization-key',
                 label: 'Tokenization Key',
-                element: lazy(() => import('./sections/TokenizationKey'))
-            }
+                element: lazy(() => import('./sections/TokenizationKey.component')),
+            },
         ],
         data: {
-            tags: [
-                'server'
-            ]
-        }
-    }
-];
+            tags: ['server'],
+        },
+    },
+]
 
 export default routes
-

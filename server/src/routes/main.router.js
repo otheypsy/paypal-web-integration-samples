@@ -5,12 +5,14 @@ import testbedRouter from './testbed.router.js'
 import notFoundMiddleware from '../middleware/notFound.middleware.js'
 import responderMiddleware from '../middleware/responder.middleware.js'
 import errorMiddleware from '../middleware/error.middleware.js'
+import authMiddleware from '../middleware/auth.middleware.js'
 
 const router = express.Router()
 
 // Pre-logic router-level middleware
 
 // API entry-point
+router.use('/api', authMiddleware)
 router.use('/api', (req, res, next) => {
     res.locals.response = {
         message: 'API',
