@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Collapse } from 'bootstrap'
-import { ReactComponent as Logo } from './pp_monogram_white.svg'
+import PPWhiteMonogram from './pp_monogram_white.svg'
 import classNames from './Header.module.scss'
 
 const Header = (props) => {
@@ -21,7 +21,7 @@ const Header = (props) => {
             <nav className={'navbar navbar-expand-lg ' + classNames.nav}>
                 <div className="container-fluid">
                     <span className="navbar-brand text-white" onClick={logoClick}>
-                        <Logo className={'d-inline-block ' + classNames.logo} />
+                        <PPWhiteMonogram className={'d-inline-block ' + classNames.logo} />
                         <span className="fs-4 px-3 align-middle">{props.title}</span>
                     </span>
                     <button className="navbar-toggler btn btn-outline-light" type="button" onClick={onToggle}>
