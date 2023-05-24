@@ -1,0 +1,1 @@
+const t={get:()=>{const e=new Date;return"["+e.getHours()+":"+e.getMinutes()+":"+e.getSeconds()+"]"}},o=(...e)=>console.log(t.get(),...e),n=(...e)=>console.error(t.get(),...e),s=(...e)=>console.warn(t.get(),...e);export{n as d,o as l,s as w};
