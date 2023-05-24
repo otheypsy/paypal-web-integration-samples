@@ -1,5 +1,6 @@
 import braintree from 'braintree'
 import { GraphQLClient } from 'graphql-request'
+import { base64 } from './core.utils.js'
 import createLoggers from './logger.utils.js'
 
 const { log, success, error } = createLoggers('braintree.utils.js')
@@ -22,10 +23,6 @@ const viewerQuery = `
         }
     }
 `
-
-const base64 = {
-    encode: (string) => Buffer.from(string).toString('base64'),
-}
 
 const setupSDK = async () => {
     log('Setting up SDK')

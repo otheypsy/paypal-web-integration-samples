@@ -1,23 +1,21 @@
-import ApiService from '../../../services/ApiService';
+import ApiService from '../../../../services/api.service.jsx'
 
 const BraintreeVaultService = {
     postData: {
-        create: {
-
-        },
+        create: {},
         paypal: {
             arguments: {
-                token: 'bhh6wpw'
-            }
+                token: 'bhh6wpw',
+            },
         },
         find: {
             arguments: {
-                token: 'fvhnzw2'
-            }
+                token: 'fvhnzw2',
+            },
         },
         update: {
             arguments: {
-                token: 'fvhnzw2'
+                token: 'fvhnzw2',
             },
             parameters: {
                 billingAddress: {
@@ -30,10 +28,10 @@ const BraintreeVaultService = {
                     postalCode: '12345',
                     countryCodeAlpha2: 'US',
                     options: {
-                        updateExisting: true
-                    }
-                }
-            }
+                        updateExisting: true,
+                    },
+                },
+            },
         },
         sale: {
             parameters: {
@@ -47,57 +45,47 @@ const BraintreeVaultService = {
                     locality: 'Oakland',
                     region: 'CA',
                     postalCode: '12345',
-                    countryCodeAlpha2: 'US'
+                    countryCodeAlpha2: 'US',
                 },
                 options: {
-                    submitForSettlement: false
-                }
-            }
-        }
+                    submitForSettlement: false,
+                },
+            },
+        },
     },
     create: async (params) => {
-        const uri = '/braintree/sdk/vault/create';
+        const uri = '/braintree/sdk/vault/create'
         const postData = {
-            params: params
-        };
-        const response = await ApiService.post(uri, postData);
-        if(response.data)
-            return response.data;
-        else
-            return response.error;
+            params: params,
+        }
+        const response = await ApiService.post(uri, postData)
+        if (response.data) return response.data
+        else return response.error
     },
     find: async (token) => {
-        const uri = '/braintree/sdk/vault/find/' + token;
-        const response = await ApiService.get(uri);
-        if(response.data)
-            return response.data;
-        else
-            return response.error;
+        const uri = '/braintree/sdk/vault/find/' + token
+        const response = await ApiService.get(uri)
+        if (response.data) return response.data
+        else return response.error
     },
     update: async (postData) => {
-        const uri = '/braintree/sdk/vault/update';
-        const response = await ApiService.patch(uri, postData);
-        if(response.data)
-            return response.data;
-        else
-            return response.error;
+        const uri = '/braintree/sdk/vault/update'
+        const response = await ApiService.patch(uri, postData)
+        if (response.data) return response.data
+        else return response.error
     },
     delete: async (token) => {
-        const uri = '/braintree/sdk/vault/delete/' + token;
-        const response = await ApiService.delete(uri);
-        if(response.data)
-            return response.data;
-        else
-            return response.error;
+        const uri = '/braintree/sdk/vault/delete/' + token
+        const response = await ApiService.delete(uri)
+        if (response.data) return response.data
+        else return response.error
     },
     generateNonce: async (paymentToken) => {
-        const uri = '/braintree/sdk/vault/generateNonce/' + paymentToken;
-        const response = await ApiService.get(uri);
-        if(response.data)
-            return response.data;
-        else
-            return response.error;
-    }
-};
+        const uri = '/braintree/sdk/vault/generateNonce/' + paymentToken
+        const response = await ApiService.get(uri)
+        if (response.data) return response.data
+        else return response.error
+    },
+}
 
-export default BraintreeVaultService;
+export default BraintreeVaultService

@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types'
 import { useState } from 'react'
-import BTClient from 'braintree-web/client'
 import withSDKOperations from '../../../../layouts/withSDKOperations'
-import { log, danger } from '../../../../../../services/LoggerService'
-import { serverInterface } from '../../../../services/BraintreeInterface'
+import createLoggers from '../../../../../../../utils/logger.utils.jsx'
+import { clientInterface, serverInterface } from '../../../../services/BraintreeInterface'
 import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/BusyHooks'
 import { useSetError } from '../../../../../../states/Error/ErrorHooks'
 import { useAddAppContext } from '../../../../../../states/AppContext/AppContextHooks'
 import { useAddOutput } from '../../../../../../states/Output/OutputHooks'
+
+const { log, error } = createLoggers('ClientToken.component.jsx')
 
 const _operations = {
     clientTokenGenerate: {
@@ -49,13 +50,13 @@ const ClientToken = (props) => {
                 [],
                 props.operations.clientTokenGenerate.data.parameters,
             )
-            log('ClientToken: createClientToken', response)
+            log('createClientToken', response)
             addOutput('ClientToken', response)
             if (!response?.clientToken) throw Error('Response does not contain client token')
             setClientToken(response.clientToken)
-        } catch (error) {
+        } catch (e) {
             setError()
-            danger('ClientToken: createClientToken', error)
+            error(e)
         }
         removeBusy()
     }
@@ -63,15 +64,16 @@ const ClientToken = (props) => {
     const createClientInstance = async () => {
         addBusy()
         try {
-            const clientInstance = await BTClient.create({
+            const clientInstance = await clientInterface('Client', {
                 ...props.operations.clientCreate.data.options,
                 authorization: clientToken,
             })
-            log('ClientToken: createClientInstance', clientInstance)
+            log('createClientInstance', clientInstance)
             addOutput('ClientInstance', clientInstance)
             if (clientInstance) addAppContext('clientInstance', clientInstance)
-        } catch (error) {
-            danger('ClientToken: createClientInstance', error)
+        } catch (e) {
+            setError()
+            error(e)
         }
         removeBusy()
     }

@@ -20,13 +20,13 @@ const jsonRequest = {
             throw new Error('HTTP Fetch Failed', { cause: response })
         }
         log(url, method, response)
-        return response
+        return response.json()
     },
 
-    get: (url, body = undefined, headers = []) => jsonRequest._request(url, 'GET', body, headers),
-    post: (url, body = undefined, headers = []) => jsonRequest._request(url, 'POST', body, headers),
-    patch: (url, body = undefined, headers = []) => jsonRequest._request(url, 'PATCH', body, headers),
-    delete: (url, body = undefined, headers = []) => jsonRequest._request(url, 'DELETE', body, headers),
+    get: (url, body = undefined, headers = {}) => jsonRequest._request(url, 'GET', body, headers),
+    post: (url, body = undefined, headers = {}) => jsonRequest._request(url, 'POST', body, headers),
+    patch: (url, body = undefined, headers = {}) => jsonRequest._request(url, 'PATCH', body, headers),
+    delete: (url, body = undefined, headers = {}) => jsonRequest._request(url, 'DELETE', body, headers),
 }
 
 export { jsonRequest }

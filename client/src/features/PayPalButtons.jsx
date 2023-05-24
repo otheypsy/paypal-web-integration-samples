@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import { useRef, useMemo, useEffect } from 'react'
 import createLoggers from '../utils/logger.utils.jsx'
 
-const { log, success, error, warn } = createLoggers('braintree.utils.js')
+const { log, error, warn } = createLoggers('braintree.utils.js')
 
 const PayPalButtonsCore = (props) => {
     const ppContainer = useRef()
@@ -17,8 +17,8 @@ const PayPalButtonsCore = (props) => {
                 label: 'paypal',
                 tagline: 'false',
             },
-            onClick: (data, actions) => success('PayPalButtons: onClick', { data, actions }),
-            onInit: (data, actions) => success('PayPalButtons: onInit', { data, actions }),
+            onClick: (data, actions) => log('PayPalButtons: onClick', { data, actions }),
+            onInit: (data, actions) => log('PayPalButtons: onInit', { data, actions }),
             createOrder: (data, actions) => log('PayPalButtons: createOrder', { data, actions }),
             onApprove: (data, actions) => log('PayPalButtons: onApprove', { data, actions }),
             onCancel: (e) => error('PayPalButtons: onCancel', e),
