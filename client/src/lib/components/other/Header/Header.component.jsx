@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Collapse } from 'bootstrap'
-import PPWhiteMonogram from './pp_monogram_white.svg'
+import { ReactComponent as PPWhiteMonogram } from './pp_monogram_white.svg'
 import classNames from './Header.module.scss'
 
 const Header = (props) => {

@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { RecoilRoot } from 'recoil'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 import appRoutes from './apps/routes'
 import MainLayout from './layouts/MainLayout'
 import ErrorBoundary from '../lib/components/other/ErrorBoundary/ErrorBoundary'
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
 const MainApp = () => {
     return (
         <StrictMode>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Omkar Desai | PayPal Integration Samples</title>
+            </Helmet>
             <ErrorBoundary>
                 <RecoilRoot>
                     <RouterProvider router={router} />
