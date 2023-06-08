@@ -5,9 +5,6 @@ import svgrPlugin from 'vite-plugin-svgr'
 
 const config = defineConfig({
     build: {
-        // Enable Rollup watcher @see https://vitejs.dev/config/#build-watch
-        watch: {},
-
         // Opt for the fastest build
         target: 'esnext',
         minify: true,
@@ -32,8 +29,9 @@ const config = defineConfig({
     },
 
     plugins: [
-        react(),
         svgrPlugin(),
+        react(),
+
         {
             // default settings on build (i.e. fail on error)
             ...eslint({
