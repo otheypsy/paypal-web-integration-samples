@@ -13,20 +13,9 @@ jobs:
     deploy:
         name: Deploy Application
         needs: [test]
-        runs-on: ubuntu-latest
-
-        steps:
-            -   name: deploy node app
-                uses: appleboy/ssh-action@master
-                with:
-                    host: ${{ secrets.SSH_HOST }}
-                    username: ${{ secrets.SSH_USERNAME }}
-                    key: ${{ secrets.SSH_KEY }}
-                    port: ${{ secrets.SSH_PORT }}
-                    script: |
-                        export NVM_DIR=~/.nvm
-                        source ~/.nvm/nvm.sh
-                        cd ~/paypal-web-integration-samples
-                        git pull origin main
-                        yarn install --production
-                        pm2 start ecosystem.config.cjs
+        uses: otheypsy/paypal-web-integration-samples/.github/workflows/deploy.yml@main
+        secrets:
+            SSH_HOST: ${{ secrets.SSH_HOST }}
+            SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+            SSH_KEY: ${{ secrets.SSH_KEY }}
+            SSH_PORT: ${{ secrets.SSH_PORT }}
