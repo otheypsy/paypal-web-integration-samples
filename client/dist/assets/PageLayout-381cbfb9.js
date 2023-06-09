@@ -1,1 +1,0 @@
-import{b as l,N as c,L as n,O as r}from"./index-20ef1387.js";const u=a=>{const t=l();return React.createElement(React.Fragment,null,React.createElement("h3",null,a.label),React.createElement("hr",null),React.createElement(c,{onClick:t},a.links.map(e=>React.createElement(n,{key:e.path,to:e.path,label:e.label,onClick:t}))),React.createElement(r,null))};export{u as default};

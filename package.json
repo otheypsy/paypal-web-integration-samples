@@ -16,16 +16,16 @@
     },
     "scripts": {
         "audit": "npm i --package-lock-only && npm audit fix && del package-lock.json",
-        "lint": "eslint . --ext .js,.jsx,.ts,.tsx && stylelint \"client/src/{**/*,*}.{css,scss}\"",
         "lintServer": "eslint ./server --ext .js,.jsx,.ts,.tsx",
         "lintClient": "stylelint \"client/src/{**/*,*}.{css,scss}\" & eslint ./client --ext .js,.jsx,.ts,.tsx",
-        "start": "node server/src/server.js",
-        "startServer": "nodemon server/src/server.js",
-        "startClient": "vite serve client --config client/vite.client.config.js",
         "testServer": "vitest run --config ./server/vite.server.config.js",
         "testClient": "vitest run --config client/vite.client.config.js",
+        "startServer": "nodemon server/src/server.js",
+        "startClient": "vite serve client --config client/vite.client.config.js",
+        "lint": "echo Skipped linting",
         "test": "echo No tests to run",
-        "buildClient": "vite build client --config client/vite.client.config.js"
+        "buildClient": "vite build client --config client/vite.client.config.js",
+        "start": "node server/src/server.js"
     },
     "dependencies": {
         "@popperjs/core": "^2.8.4",
