@@ -35,6 +35,7 @@ const config = defineConfig({
         {
             // default settings on build (i.e. fail on error)
             ...eslint({
+                // TODO: Clean up linting and toggle flags
                 failOnWarning: false,
                 failOnError: false,
             }),
