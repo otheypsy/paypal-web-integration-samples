@@ -3,10 +3,10 @@ import { useState } from 'react'
 import withSDKOperations from '../../../../layouts/withSDKOperations'
 import createLoggers from '../../../../../../../utils/logger.utils.jsx'
 import { clientInterface, serverInterface } from '../../../../services/BraintreeInterface'
-import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/BusyHooks'
-import { useSetError } from '../../../../../../states/Error/ErrorHooks'
-import { useAddAppContext } from '../../../../../../states/AppContext/AppContextHooks'
-import { useAddOutput } from '../../../../../../states/Output/OutputHooks'
+import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
+import { useSetError } from '../../../../../../states/Error/error.hooks.jsx'
+import { useAddAppContext } from '../../../../../../states/AppContext/appContext.hooks.jsx'
+import { useAddOutput } from '../../../../../../states/Output/output.hooks.jsx'
 
 const { log, error } = createLoggers('ClientToken.component.jsx')
 

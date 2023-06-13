@@ -57,7 +57,10 @@
         "recoil": "^0.7.6",
         "sass": "^1.50.0",
         "serve-favicon": "^2.5.0",
-        "serve-index": "^1.9.1"
+        "serve-index": "^1.9.1",
+        "vite": "^4.3.9",
+        "vite-plugin-eslint": "^1.8.1",
+        "vite-plugin-svgr": "^2.2.2"
     },
     "devDependencies": {
         "@babel/core": "^7.21.0",
@@ -85,9 +88,6 @@
         "stylelint-config-recommended-scss": "^8.0.0",
         "stylelint-scss": "^4.3.0",
         "supports-color": "^9.3.1",
-        "vite": "^4.0.3",
-        "vite-plugin-eslint": "^1.8.1",
-        "vite-plugin-svgr": "^2.2.2",
         "vitest": "^0.29.7",
         "webdriverio": "^8.7.0"
     },

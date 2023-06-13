@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import withSDKOperations from '../../../../layouts/withSDKOperations'
-import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/BusyHooks'
-import { useAddOutput } from '../../../../../../states/Output/OutputHooks'
-import { useSetError } from '../../../../../../states/Error/ErrorHooks'
+import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
+import { useAddOutput } from '../../../../../../states/Output/output.hooks.jsx'
+import { useSetError } from '../../../../../../states/Error/error.hooks.jsx'
 import { log, danger } from '../../../../../../services/LoggerService'
 import { serverInterface } from '../../../../services/BraintreeInterface'
 

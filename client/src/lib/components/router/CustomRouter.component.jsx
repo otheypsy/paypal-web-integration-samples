@@ -1,4 +1,3 @@
-import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import GenericPage from '../other/GenericPage/GenericPage.component'

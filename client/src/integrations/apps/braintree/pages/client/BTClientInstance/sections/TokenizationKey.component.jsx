@@ -2,10 +2,10 @@ import PropTypes from 'prop-types'
 import withSDKOperations from '../../../../layouts/withSDKOperations'
 import createLoggers from '../../../../../../../utils/logger.utils.jsx'
 import { clientInterface } from '../../../../services/BraintreeInterface'
-import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/BusyHooks'
-import { useSetError } from '../../../../../../states/Error/ErrorHooks'
-import { useAddOutput } from '../../../../../../states/Output/OutputHooks'
-import { useAddAppContext } from '../../../../../../states/AppContext/AppContextHooks'
+import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
+import { useSetError } from '../../../../../../states/Error/error.hooks.jsx'
+import { useAddOutput } from '../../../../../../states/Output/output.hooks.jsx'
+import { useAddAppContext } from '../../../../../../states/AppContext/appContext.hooks.jsx'
 
 const { log, error } = createLoggers('ClientToken.component.jsx')
 

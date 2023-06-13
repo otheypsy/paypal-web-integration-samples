@@ -40,7 +40,7 @@ const PayPalButtonsCore = (props) => {
                 try {
                     if (button.isEligible() && container) await button.render(container)
                 } catch (error) {
-                    // CRITICAL: Catch error when render fails when DOM is closed or destroyed.
+                    // CRITICAL: Catch error when render fails because DOM is closed or destroyed.
                     warn('PayPalButtons', error.message)
                 }
             }

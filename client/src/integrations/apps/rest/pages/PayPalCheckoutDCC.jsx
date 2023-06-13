@@ -2,8 +2,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Card, OutputJson } from 'pp-framework-react'
 import PayPalOrdersService from '../services/PayPalOrdersService'
 import AppService from '../../../../services/app.service.jsx'
-import OutputContext from '../../../context/OutputContext'
-import BusyContext from '../../../context/BusyContext'
 
 const PayPalCheckoutDCC = () => {
     const [order] = useState({
@@ -81,7 +79,6 @@ const PayPalCheckoutDCC = () => {
         ],
     })
     const [hostedFieldsInstance, setHostedFieldsInstance] = useState({})
-    const outputContext = useContext(OutputContext)
     const busyContext = useContext(BusyContext)
 
     useEffect(() => {
@@ -95,7 +92,7 @@ const PayPalCheckoutDCC = () => {
                 'data-client-token': '12345',
             },
         )
-        if (paypal.hasOwnProperty('isEligible') && paypal.HostedFields.isEligible()) {
+        if (paypal?.HostedFields?.isEligible()) {
             renderPayPalHostedFields(paypal)
         } else {
             document.getElementById('paypalHostedFields').style.display = 'none'
@@ -159,7 +156,7 @@ const PayPalCheckoutDCC = () => {
             <Card>
                 <div id="paypalCheckoutDiv" />
                 <div id="paypalHostedFields">
-                    <div align="center"> -- OR -- </div>
+                    <div> -- OR -- </div>
                     <div>
                         <label htmlFor="cardNumber">Card Number</label>
                         <div id="cardNumber" className="cardField" />
@@ -238,7 +235,7 @@ const PayPalCheckoutDCC = () => {
                     </div>
                     <br />
                     <br />
-                    <button value="submit" id="submit" className="btn">
+                    <button value="submit" id="submit" className="btn" onClick={onSubmit}>
                         Pay
                     </button>
                 </div>

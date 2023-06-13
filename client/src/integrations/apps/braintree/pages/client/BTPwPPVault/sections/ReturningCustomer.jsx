@@ -4,10 +4,10 @@ import BTPayPalCheckout from 'braintree-web/paypal-checkout'
 import withSDKOperations from '../../../../layouts/withSDKOperations'
 import { log, danger } from '../../../../../../services/LoggerService'
 import { serverInterface } from '../../../../services/BraintreeInterface'
-import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/BusyHooks'
-import { useSetError } from '../../../../../../states/Error/ErrorHooks'
-import { useAppContext } from '../../../../../../states/AppContext/AppContextHooks'
-import { useAddOutput } from '../../../../../../states/Output/OutputHooks'
+import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
+import { useSetError } from '../../../../../../states/Error/error.hooks.jsx'
+import { useAppContext } from '../../../../../../states/AppContext/appContext.hooks.jsx'
+import { useAddOutput } from '../../../../../../states/Output/output.hooks.jsx'
 
 const _operations = {
     paypalCheckoutCreate: {

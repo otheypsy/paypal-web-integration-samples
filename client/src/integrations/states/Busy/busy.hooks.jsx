@@ -1,5 +1,5 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import BusyState from './BusyState'
+import BusyState from './busy.state.jsx'
 
 const _uuid = () => {
     return crypto.randomUUID() || Date.now()
