@@ -1,4 +1,4 @@
-name: Test Application
+name: Validate Application
 
 on:
     workflow_call:
