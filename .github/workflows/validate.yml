@@ -59,8 +59,13 @@ jobs:
                 env:
                     CI: true
 
-            -   name: test node app
-                run: yarn test
+            -   name: test server code
+                run: yarn testServer
+                env:
+                    CI: true
+                    
+            -   name: test client code
+                run: yarn testClient
                 env:
                     CI: true
             
