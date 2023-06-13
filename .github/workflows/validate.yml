@@ -1,4 +1,4 @@
-name: Test Application
+name: Validate Application
 
 on:
     workflow_call:
@@ -27,8 +27,13 @@ jobs:
                 env:
                     CI: true
 
-            -   name: lint code
-                run: yarn lint
+            -   name: lint server code
+                run: yarn lintServer
+                env:
+                    CI: true
+
+            -   name: lint client code
+                run: yarn lintClient
                 env:
                     CI: true
 
@@ -54,11 +59,16 @@ jobs:
                 env:
                     CI: true
 
-            -   name: test node app
-                run: yarn test
+            -   name: test server code
+                run: yarn testServer
                 env:
                     CI: true
-
+                    
+            -   name: test client code
+                run: yarn testClient
+                env:
+                    CI: true
+            
     build:
 
         runs-on: ubuntu-latest
