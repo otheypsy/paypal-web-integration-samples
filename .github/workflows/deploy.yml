@@ -33,5 +33,4 @@ jobs:
                       cd ~/paypal-web-integration-samples
                       git pull origin main
                       yarn install --production
-                      yarn buildClient
                       pm2 start ecosystem.config.cjs
