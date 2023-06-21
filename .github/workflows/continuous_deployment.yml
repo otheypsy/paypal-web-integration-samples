@@ -8,12 +8,12 @@ on:
 jobs:
     test:
         name: Test Application
-        uses: otheypsy/paypal-web-integration-samples/.github/workflows/actions/validate.yml@main
+        uses: otheypsy/paypal-web-integration-samples/.github/workflows/validate.yml@main
 
     deploy:
         name: Deploy Application
         needs: [test]
-        uses: otheypsy/paypal-web-integration-samples/.github/workflows/actions/deploy.yml@main
+        uses: otheypsy/paypal-web-integration-samples/.github/workflows/deploy.yml@main
         secrets:
             SSH_HOST: ${{ secrets.SSH_HOST }}
             SSH_USERNAME: ${{ secrets.SSH_USERNAME }}

@@ -1,8 +1,37 @@
 import React, { useState, useEffect } from 'react'
 import PayPalOrdersService from '../../services/PayPalOrdersService.jsx'
 import { Card, OutputJson, BusyIndicator } from '../../../../lib/components/export.jsx'
+import createLoggers from '../../../../utils/logger.utils.jsx'
 
-const PayPalCheckout = () => {
+const { log, error } = createLoggers('PPCheckout.component.jsx')
+
+const _operations = {
+    createOrder: {
+        label: 'v2.orders.create',
+        type: 'server',
+        data: {
+            uri: 'v2/checkout/orders',
+            headers: [],
+            body: {
+                // customerId: '839327792',
+                merchantAccountId: 'odesai_USD',
+            },
+        },
+    },
+    onApprove: {
+        label: 'v2.orders.execute',
+        type: 'client',
+        data: {
+            uri: 'v2/checkout/orders',
+            headers: [],
+            body: {
+                authorization: 'CLIENT_TOKEN_HERE',
+            },
+        },
+    },
+}
+
+const PPCheckout = () => {
     const [order] = useState({
         intent: 'CAPTURE',
         purchase_units: [
@@ -148,4 +177,4 @@ const PayPalCheckout = () => {
     )
 }
 
-export default PayPalCheckout
+export default PPCheckout

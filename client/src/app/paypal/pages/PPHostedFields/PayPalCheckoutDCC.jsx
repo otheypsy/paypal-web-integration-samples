@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Card, OutputJson } from '../../../../lib/components/export.jsx'
 import PayPalOrdersService from '../../services/PayPalOrdersService.jsx'
 import AppService from '../../../../services/app.service.jsx'
+import createLoggers from '../../../../utils/logger.utils.jsx'
+
+const { log, error } = createLoggers('ClientToken.component.jsx')
 
 const PayPalCheckoutDCC = () => {
     const [order] = useState({
