@@ -2,7 +2,7 @@ import { Profiler } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom/client'
 import './index.scss'
-import MainApp from './integrations/MainApp'
+import MainApp from './MainApp.component.jsx'
 
 const _profiling = false
 

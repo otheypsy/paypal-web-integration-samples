@@ -43,6 +43,8 @@ const setupSDK = async () => {
 }
 
 const setupGQL = async () => {
+    log('Setting up GQL Client')
+
     try {
         const today = new Date()
         const dd = String(today.getDate()).padStart(2, '0')

@@ -20,7 +20,13 @@ const Header = (props) => {
         <>
             <nav className={'navbar navbar-expand-lg ' + classNames.nav}>
                 <div className="container-fluid">
-                    <span className="navbar-brand text-white" onClick={logoClick}>
+                    <span
+                        className="navbar-brand text-white"
+                        onClick={logoClick}
+                        onKeyUp={logoClick}
+                        role="button"
+                        tabIndex="0"
+                    >
                         <PPWhiteMonogram className={'d-inline-block ' + classNames.logo} />
                         <span className="fs-4 px-3 align-middle">{props.title}</span>
                     </span>
