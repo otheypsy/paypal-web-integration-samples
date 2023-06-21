@@ -27,7 +27,7 @@ router.use('/api', (req, res, next) => {
 
 // Feature based routers
 router.use('/api/braintree', btRouter)
-// mainRouter.use('/api/paypal/rest', paypal)
+// mainRouter.use('/api/paypal/paypal', paypal)
 router.use('/api/testbed', testbedRouter)
 
 // React Front-End

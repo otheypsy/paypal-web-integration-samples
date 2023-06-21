@@ -65,4 +65,17 @@ const createRoutes = (routes, basePath = '/') => {
     return finalRoutes
 }
 
-export { createRoutes, createLinks }
+const mapPageRoutes = (routes, pageTag) => {
+    return routes.map((route) => {
+        const tags = [pageTag, ...(route?.data?.tags ? route.data.tags : [])]
+        return {
+            ...route,
+            data: {
+                ...route.data,
+                tags: [...new Set(tags)],
+            },
+        }
+    })
+}
+
+export { createRoutes, createLinks, mapPageRoutes }

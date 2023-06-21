@@ -1,6 +1,6 @@
 ```jsx static
 
-const routes = [
+const BtDataCollectorRoutes = [
     {
         label: 'Form',
         path: '/form',
@@ -17,7 +17,7 @@ const AppLayout = ({
     mainRouter: {
         mountPath,
         currentPath,
-        routes
+        BtDataCollectorRoutes
     },
     children
 }) => {
@@ -31,7 +31,7 @@ const AppLayout = ({
 
 
 <CustomRouter
-    routes={routes}
+    BtDataCollectorRoutes={BtDataCollectorRoutes}
     layout={AppLayout}>
 </CustomRouter>
 ```
