@@ -4,7 +4,7 @@ const routes = [
     {
         label: 'PPCheckout',
         path: 'pp-xo',
-        element: lazy(() => import('./pages/PPCheckout/PayPalCheckout.jsx')),
+        element: lazy(() => import('./pages/PPCheckout/PPCheckout.component.jsx')),
     },
     {
         label: 'PPHostedFields',
