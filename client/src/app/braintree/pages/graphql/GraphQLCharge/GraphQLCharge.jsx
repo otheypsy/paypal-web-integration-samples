@@ -1,6 +1,6 @@
 import React from 'react'
 import { CustomRouter } from 'pp-framework-react'
-import routes from './routes.jsx'
+import routes from './gql.charge.routes.jsx'
 import PageLayout from '../../../../../layouts/PageLayout.component.jsx'
 
 const GraphQLCharge = (props) => {

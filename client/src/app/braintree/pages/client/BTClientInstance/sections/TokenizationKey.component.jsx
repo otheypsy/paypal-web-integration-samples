@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
-import withSDKOperations from '../../../../layouts/withSDKOperations.jsx'
+import withOperations from '../../../../../../layouts/withOperations.component.jsx'
 import createLoggers from '../../../../../../utils/logger.utils.jsx'
-import { clientInterface } from '../../../../services/BraintreeInterface.jsx'
+import { clientInterface } from '../../../../../../services/bt.service.jsx'
 import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
 import { useSetError } from '../../../../../../states/Error/error.hooks.jsx'
 import { useAddOutput } from '../../../../../../states/Output/output.hooks.jsx'
@@ -52,4 +52,4 @@ const TokenizationKey = (props) => {
 TokenizationKey.propTypes = {
     operations: PropTypes.object,
 }
-export default withSDKOperations(TokenizationKey, _operations)
+export default withOperations(TokenizationKey, _operations)

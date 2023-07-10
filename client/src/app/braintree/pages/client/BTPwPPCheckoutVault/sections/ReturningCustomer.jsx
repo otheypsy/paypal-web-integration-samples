@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import { useState, useRef } from 'react'
 import BTPayPalCheckout from 'braintree-web/paypal-checkout'
-import withSDKOperations from '../../../../layouts/withSDKOperations.jsx'
+import withOperations from '../../../../../../layouts/withOperations.component.jsx'
 import { log, danger } from '../../../../../../integrations/services/LoggerService.jsx'
-import { serverInterface } from '../../../../services/BraintreeInterface.jsx'
+import { serverInterface } from '../../../../../../services/bt.service.jsx'
 import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
 import { useSetError } from '../../../../../../states/Error/error.hooks.jsx'
 import { useAppContext } from '../../../../../../states/AppContext/appContext.hooks.jsx'
@@ -225,4 +225,4 @@ ReturningCustomer.propTypes = {
     operations: PropTypes.object,
 }
 
-export default withSDKOperations(ReturningCustomer, _operations)
+export default withOperations(ReturningCustomer, _operations)

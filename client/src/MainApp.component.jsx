@@ -28,6 +28,22 @@ const MainApp = () => {
                 <Helmet>
                     <meta charSet="utf-8" />
                     <title>Omkar Desai | PayPal Integration Samples</title>
+                    <meta
+                        httpEquiv="Content-Security-Policy"
+                        content={`
+                            default-src 'self';
+                            script-src 'self' 'unsafe-inline' https://*.paypal.com;
+                            style-src 'self' 'unsafe-inline';
+                            object-src 'self';
+                            base-uri 'self';
+                            connect-src 'self' https://*.paypal.com https://*.braintree-api.com https://*.braintreegateway.com;
+                            font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com https://www.paypalobjects.com;
+                            frame-src 'self' https://*.paypal.com;
+                            img-src 'self' https://www.paypalobjects.com/;
+                            media-src 'self';
+                            manifest-src 'self';
+                        `}
+                    ></meta>
                 </Helmet>
                 <ErrorBoundary>
                     <RecoilRoot>

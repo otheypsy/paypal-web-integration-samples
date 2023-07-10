@@ -2,8 +2,8 @@ import React, { useState, useContext } from 'react'
 import AppContext from '../../../../../../context/AppContext'
 import BusyContext from '../../../../../../context/BusyContext'
 import OutputContext from '../../../../../../context/OutputContext'
-import withSDKOperations from '../../../../layouts/withSDKOperations.jsx'
-import { clientInterface } from '../../../../services/BraintreeInterface.jsx'
+import withOperations from '../../../../../../layouts/withOperations.component.jsx'
+import { clientInterface } from '../../../../../../services/bt.service.jsx'
 
 const _operations = {
     createACHInstance: {
@@ -87,4 +87,4 @@ const TokenizedCheck = (props) => {
     )
 }
 
-export default withSDKOperations(TokenizedCheck, _operations)
+export default withOperations(TokenizedCheck, _operations)

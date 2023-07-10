@@ -1,4 +1,4 @@
-import withSDKOperations from '../../layouts/withSDKOperations.jsx'
+import withOperations from '../../../../layouts/withOperations.component.jsx'
 
 const _operations = {
     clientTokenGenerate: {
@@ -31,4 +31,4 @@ const Yolo = (props) => {
     return <h1>Testing</h1>
 }
 
-export default withSDKOperations(Yolo, _operations)
+export default withOperations(Yolo, _operations)

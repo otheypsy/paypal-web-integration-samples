@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types'
-import withSDKOperations from '../../../../layouts/withSDKOperations.jsx'
+import withOperations from '../../../../../../layouts/withOperations.component.jsx'
 import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
 import { useAddOutput } from '../../../../../../states/Output/output.hooks.jsx'
 import { useSetError } from '../../../../../../states/Error/error.hooks.jsx'
 import { log, danger } from '../../../../../../integrations/services/LoggerService.jsx'
-import { serverInterface } from '../../../../services/BraintreeInterface.jsx'
+import { serverInterface } from '../../../../../../services/bt.service.jsx'
 
 const _operations = {
     transactionSale: {
@@ -59,4 +59,4 @@ MerchantInitiated.propTypes = {
     operations: PropTypes.object,
 }
 
-export default withSDKOperations(MerchantInitiated, _operations)
+export default withOperations(MerchantInitiated, _operations)

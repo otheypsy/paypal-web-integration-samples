@@ -1,8 +1,7 @@
-import PropTypes from 'prop-types'
 import { useState } from 'react'
-import withSDKOperations from '../../../../layouts/withSDKOperations.jsx'
 import createLoggers from '../../../../../../utils/logger.utils.jsx'
-import { clientInterface, serverInterface } from '../../../../services/BraintreeInterface.jsx'
+import withOperations from '../../../../../../layouts/withOperations.component.jsx'
+import { clientInterface, serverInterface } from '../../../../../../services/bt.service.jsx'
 import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
 import { useSetError } from '../../../../../../states/Error/error.hooks.jsx'
 import { useAddAppContext } from '../../../../../../states/AppContext/appContext.hooks.jsx'
@@ -11,11 +10,13 @@ import { useAddOutput } from '../../../../../../states/Output/output.hooks.jsx'
 const { log, error } = createLoggers('ClientToken.component.jsx')
 
 const _operations = {
-    clientTokenGenerate: {
+    createClientToken: {
         label: 'gateway.clientToken.generate()',
         type: 'server',
         data: {
             uri: 'test',
+            uri1: 'test',
+            headers: [],
             parameters: {
                 // customerId: '839327792',
                 merchantAccountId: 'odesai_USD',
@@ -93,8 +94,4 @@ const ClientToken = (props) => {
     )
 }
 
-ClientToken.propTypes = {
-    operations: PropTypes.object,
-}
-
-export default withSDKOperations(ClientToken, _operations)
+export default withOperations(ClientToken, _operations)

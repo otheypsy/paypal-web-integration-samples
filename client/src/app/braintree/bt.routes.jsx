@@ -1,11 +1,11 @@
 import { mapPageRoutes } from '../../services/router.service.jsx'
-// import graphqlRoutes from './pages/graphql/BtDataCollectorRoutes';
+import graphqlRoutes from './pages/graphql/gql.routes.jsx'
 import clientRoutes from './pages/client/bt.client.routes.jsx'
 // import serverRoutes from './pages/server/BtDataCollectorRoutes';
 import { lazy } from 'react'
 
 const routes = [
-    //..._mapPageRoutes(graphqlRoutes, 'graphql'),
+    ...mapPageRoutes(graphqlRoutes, 'graphql'),
     ...mapPageRoutes(clientRoutes, 'client'),
     //..._mapPageRoutes(serverRoutes, 'server')
 ]

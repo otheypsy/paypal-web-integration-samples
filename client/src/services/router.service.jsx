@@ -16,13 +16,16 @@ const createRoutes = (routes, basePath = '/') => {
     const finalRoutes = routes.map((route) => {
         const pad = basePath === '/' ? '' : '/'
         const mountPath = basePath + pad + route.path
+        const props = {
+            label: route.label,
+            mountPath: mountPath,
+            ...(route?.data && { data: route.data }),
+        }
 
-        let children = []
-        let links = []
-
+        let children
         if (route?.children?.length > 0) {
-            links = createLinks(route.children)
-            children = createRoutes(route.children, mountPath)
+            props.links = createLinks(route.children)
+            children = createRoutes(route.children, props.mountPath)
         }
 
         return {
@@ -30,7 +33,7 @@ const createRoutes = (routes, basePath = '/') => {
             path: route.path + '/*',
             element: (
                 <Suspense fallback={<GenericPage details="Loading..." />}>
-                    <route.element label={route.label} mountPath={mountPath} data={route?.data} links={links} />
+                    <route.element {...props} />
                 </Suspense>
             ),
             errorElement: (

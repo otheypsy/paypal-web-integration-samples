@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import { useState, useRef } from 'react'
 import BTPayPalCheckout from 'braintree-web/paypal-checkout'
-import withSDKOperations from '../../../../layouts/withSDKOperations.jsx'
-import { serverInterface } from '../../../../services/BraintreeInterface.jsx'
+import withOperations from '../../../../../../layouts/withOperations.component.jsx'
+import { serverInterface } from '../../../../../../services/bt.service.jsx'
 import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
 import { useAddOutput } from '../../../../../../states/Output/output.hooks.jsx'
 import { useSetError } from '../../../../../../states/Error/error.hooks.jsx'
@@ -223,4 +223,4 @@ NewCustomer.propTypes = {
     operations: PropTypes.object,
 }
 
-export default withSDKOperations(NewCustomer, _operations, _requiredContext)
+export default withOperations(NewCustomer, _operations, _requiredContext)

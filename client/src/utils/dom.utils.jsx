@@ -1,4 +1,4 @@
-const loadScript = (url, queryParams, dataAttributes) => {
+const loadScript = (url, queryParams = {}, dataAttributes = {}) => {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script')
         const finalUrl = new URL(url)

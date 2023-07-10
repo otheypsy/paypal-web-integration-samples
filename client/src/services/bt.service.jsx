@@ -1,10 +1,10 @@
 import BTClient from 'braintree-web/client'
 import BTPayPalCheckout from 'braintree-web/paypal-checkout'
 import BTUSBankAccount from 'braintree-web/us-bank-account'
-import createLoggers from '../../../utils/logger.utils.jsx'
-import { jsonRequest } from '../../../utils/http.utils.jsx'
+import createLoggers from '../utils/logger.utils.jsx'
+import { jsonRequest } from '../utils/http.utils.jsx'
 
-const { error } = createLoggers('http.utils.jsx')
+const { log, error } = createLoggers('bt.service.jsx')
 
 const _clientMapping = {
     Client: BTClient,
@@ -37,4 +37,8 @@ const serverInterface = async (resource, operation, args = [], params = []) => {
     return await jsonRequest.post(url, postData, headers)
 }
 
-export { clientInterface, serverInterface }
+const gqlInterface = async (query, mutation) => {
+    log(query, mutation)
+}
+
+export { clientInterface, serverInterface, gqlInterface }

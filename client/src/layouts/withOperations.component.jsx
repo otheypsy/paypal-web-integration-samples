@@ -1,6 +1,9 @@
 import { useReducer } from 'react'
-import OperationEdit from '../../../components/OperationEdit.component.jsx'
-import { useAppContext } from '../../../states/AppContext/appContext.hooks.jsx'
+import OperationEdit from '../components/OperationEdit.component.jsx'
+import { useAppContext } from '../states/AppContext/appContext.hooks.jsx'
+
+// import createLoggers from '../utils/logger.utils.jsx'
+// const { log, error } = createLoggers('withOperations.component.jsx')
 
 const _operationsReducer = {
     reducer: (state, action) => {
@@ -15,7 +18,7 @@ const _operationsReducer = {
     init: (operations) => operations,
 }
 
-const withSDKOperations = (BaseComponent, initOperations, requiredContext = []) => {
+const withOperations = (BaseComponent, initOperations, requiredContext = []) => {
     const WithSDKOperations = (props) => {
         const appContext = useAppContext()
         const [operations, dispatchOperations] = useReducer(
@@ -73,4 +76,4 @@ const withSDKOperations = (BaseComponent, initOperations, requiredContext = []) 
     return WithSDKOperations
 }
 
-export default withSDKOperations
+export default withOperations
