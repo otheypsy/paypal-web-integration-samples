@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react'
-import withSDKOperations from '../../../../layouts/withSDKOperations.jsx'
-import { clientInterface, serverInterface } from '../../../../services/BraintreeInterface.jsx'
+import withOperations from '../../../../../../layouts/withOperations.component.jsx'
+import { clientInterface, serverInterface } from '../../../../../../services/bt.service.jsx'
 import { useAppContext } from '../../../../../../context/AppContext'
 import { useOutputContext } from '../../../../../../context/OutputContext'
 import { useBusyContext } from '../../../../../../context/BusyContext'
@@ -103,4 +103,4 @@ const IndependentCheck = (props) => {
     )
 }
 
-export default withSDKOperations(IndependentCheck, _operations)
+export default withOperations(IndependentCheck, _operations)

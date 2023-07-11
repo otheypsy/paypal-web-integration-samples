@@ -1,6 +1,6 @@
 import { loadScript } from '../utils/dom.utils'
 
-const loadPPScript = async (options = {}, dataAttributes = []) => {
+const loadPPScript = async (options = {}, dataAttributes = {}) => {
     const queryParams = {
         components: 'buttons,funding-eligibility',
         'client-id': 'test',

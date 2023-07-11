@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
-import withSDKOperations from '../../../layouts/withSDKOperations.jsx'
+import withOperations from '../../../../../layouts/withOperations.component.jsx'
 import { useAddBusy, useRemoveBusy } from '../../../../../states/Busy/busy.hooks.jsx'
 import { useAddOutput } from '../../../../../states/Output/output.hooks.jsx'
 import { useSetError } from '../../../../../states/Error/error.hooks.jsx'
 import { useAppContext, useAddAppContext } from '../../../../../states/AppContext/appContext.hooks.jsx'
 import { log, danger } from '../../../../../integrations/services/LoggerService.jsx'
-import { clientInterface } from '../../../services/BraintreeInterface.jsx'
+import { clientInterface } from '../../../../../services/bt.service.jsx'
 
 const _operations = {
     dataCollectorCreate: {
@@ -57,4 +57,4 @@ BTDataCollector.propTypes = {
     operations: PropTypes.object,
 }
 
-export default withSDKOperations(BTDataCollector, _operations, ['clientInstance'])
+export default withOperations(BTDataCollector, _operations, ['clientInstance'])

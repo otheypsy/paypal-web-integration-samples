@@ -1,5 +1,5 @@
 import { lazy } from 'react'
-import btRoutes from './braintree/braintree.routes.jsx'
+import btRoutes from './braintree/bt.routes.jsx'
 import ppRoutes from './paypal/paypal.routes.jsx'
 
 const routes = [

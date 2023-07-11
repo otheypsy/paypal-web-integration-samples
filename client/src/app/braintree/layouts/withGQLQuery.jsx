@@ -39,23 +39,21 @@ const withGQLQuery = (BaseComponent, initQuery, initVariables) => {
         }
 
         return (
-            <React.Fragment>
-                <div className="row">
-                    <div className="col-8">
-                        <h5>Query</h5>
-                        <br />
-                        {renderQuery()}
-                        <br />
-                        <br />
-                        <h5>Variables</h5>
-                        <br />
-                        <OutputJson content={variables} isEditable={true} onChange={onChangeVariables} />
-                    </div>
-                    <div className="col-4">
-                        <BaseComponent {...props} query={query} variables={variables} />
-                    </div>
+            <div className="row">
+                <div className="col-8">
+                    <h5>Query</h5>
+                    <br />
+                    {renderQuery()}
+                    <br />
+                    <br />
+                    <h5>Variables</h5>
+                    <br />
+                    <OutputJson content={variables} isEditable={true} onChange={onChangeVariables} />
                 </div>
-            </React.Fragment>
+                <div className="col-4">
+                    <BaseComponent {...props} query={query} variables={variables} />
+                </div>
+            </div>
         )
     }
     WithGQLQuery.displayName = 'WithGQLQuery'
