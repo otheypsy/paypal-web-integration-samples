@@ -39,7 +39,7 @@ const MainApp = () => {
                             connect-src 'self' https://*.paypal.com https://*.braintree-api.com https://*.braintreegateway.com;
                             font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com https://www.paypalobjects.com;
                             frame-src 'self' https://*.paypal.com;
-                            img-src 'self' https://www.paypalobjects.com/;
+                            img-src 'self' https://*.paypal.com https://www.paypalobjects.com/;
                             media-src 'self';
                             manifest-src 'self';
                         `}

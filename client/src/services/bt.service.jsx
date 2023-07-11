@@ -1,6 +1,7 @@
 import BTClient from 'braintree-web/client'
 import BTPayPalCheckout from 'braintree-web/paypal-checkout'
 import BTUSBankAccount from 'braintree-web/us-bank-account'
+import BTDataCollector from 'braintree-web/data-collector'
 import createLoggers from '../utils/logger.utils.jsx'
 import { jsonRequest } from '../utils/http.utils.jsx'
 
@@ -10,6 +11,7 @@ const _clientMapping = {
     Client: BTClient,
     PayPalCheckout: BTPayPalCheckout,
     USBankAccount: BTUSBankAccount,
+    DataCollector: BTDataCollector,
 }
 
 const clientInterface = async (className, options) => {

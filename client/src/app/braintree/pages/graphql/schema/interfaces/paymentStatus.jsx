@@ -1,4 +1,4 @@
-import gql from 'graphql-tag.macro';
+import gql from 'graphql-tag'
 
 const _settled = gql`
     fragment settled on SettledEvent {
@@ -54,5 +54,5 @@ const _paymentStatus = gql`
 `
 
 export default {
-    fields: _paymentStatus
+    fields: _paymentStatus,
 }

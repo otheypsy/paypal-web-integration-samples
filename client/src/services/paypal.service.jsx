@@ -1,4 +1,5 @@
 import { loadScript } from '../utils/dom.utils'
+import { jsonRequest } from '../utils/http.utils.jsx'
 
 const loadPPScript = async (options = {}, dataAttributes = {}) => {
     const queryParams = {
@@ -10,4 +11,20 @@ const loadPPScript = async (options = {}, dataAttributes = {}) => {
     return await loadScript('https://www.paypal.com/sdk/js', queryParams, dataAttributes)
 }
 
-export { loadPPScript }
+const restInterface = async (uri, method, body = {}, apiHeaders = {}) => {
+    const url = '/api/paypal/rest/interface'
+    const authHeaders = localStorage.getItem('authHeader')
+        ? {
+              authorization: 'Basic ' + localStorage.getItem('authHeader'),
+          }
+        : {}
+    const postData = {
+        uri: uri,
+        headers: apiHeaders,
+        body: body,
+    }
+
+    return await jsonRequest[method.toLowerCase()](url, postData, authHeaders)
+}
+
+export { loadPPScript, restInterface }

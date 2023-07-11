@@ -1,4 +1,4 @@
-import gql from 'graphql-tag.macro'
+import gql from 'graphql-tag'
 import paymentStatus from '../interfaces/paymentStatus.jsx'
 
 const _fields = gql`

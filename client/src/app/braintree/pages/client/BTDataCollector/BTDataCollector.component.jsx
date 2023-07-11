@@ -1,20 +1,21 @@
-import PropTypes from 'prop-types'
+import { useEffect } from 'react'
 import withOperations from '../../../../../layouts/withOperations.component.jsx'
 import { useAddBusy, useRemoveBusy } from '../../../../../states/Busy/busy.hooks.jsx'
 import { useAddOutput } from '../../../../../states/Output/output.hooks.jsx'
 import { useSetError } from '../../../../../states/Error/error.hooks.jsx'
 import { useAppContext, useAddAppContext } from '../../../../../states/AppContext/appContext.hooks.jsx'
-import { log, danger } from '../../../../../integrations/services/LoggerService.jsx'
 import { clientInterface } from '../../../../../services/bt.service.jsx'
+import createLoggers from '../../../../../utils/logger.utils.jsx'
+
+const { log, error } = createLoggers('BTDataCollector.component.jsx')
 
 const _operations = {
-    dataCollectorCreate: {
+    createDataCollector: {
         label: 'braintree-web.dataCollector.create()',
         type: 'client',
         data: {
             options: {
-                client: 'BT_CLIENT_INSTANCE',
-                kount: true,
+                client: 'CLIENT_INSTANCE_HERE',
                 paypal: true,
             },
         },
@@ -29,19 +30,31 @@ const BTDataCollector = (props) => {
     const appContext = useAppContext()
     const addAppContext = useAddAppContext()
 
+    useEffect(() => {
+        const initOperation = () => {
+            if (
+                props.operations.createDataCollector.data.options.client !==
+                _operations.createDataCollector.data.options.client
+            )
+                return null
+            const newData = props.operations.createDataCollector.data
+            newData.options.client = appContext.clientInstance
+            props.updateOperation('createDataCollector', newData)
+        }
+        appContext.clientInstance && initOperation()
+    }, [props, appContext.clientInstance])
+
     const createDataCollector = async () => {
         addBusy()
         try {
-            const dcInstance = await clientInterface('DataCollector', {
-                ...props.operations.dataCollectorCreate.data.options,
-                client: appContext['clientInstance'],
-            })
-            log('DataCollectorAll: createDataCollector', dcInstance)
+            console.log(props.operations.createDataCollector.data.options)
+            const dcInstance = await clientInterface('DataCollector', props.operations.createDataCollector.data.options)
+            log('createDataCollector', dcInstance)
             addOutput('DataCollector', dcInstance)
             if (dcInstance) addAppContext('dcInstance', dcInstance)
-        } catch (error) {
+        } catch (e) {
             setError()
-            danger('DataCollectorAll: createDataCollector', error)
+            error(e)
         }
         removeBusy()
     }
@@ -51,10 +64,6 @@ const BTDataCollector = (props) => {
             Create DC Instance
         </button>
     )
-}
-
-BTDataCollector.propTypes = {
-    operations: PropTypes.object,
 }
 
 export default withOperations(BTDataCollector, _operations, ['clientInstance'])

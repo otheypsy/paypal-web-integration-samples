@@ -1,4 +1,4 @@
-import gql from 'graphql-tag.macro'
+import gql from 'graphql-tag'
 import transactionFragment from '../fragments/transaction.jsx'
 
 const _creditCard = {

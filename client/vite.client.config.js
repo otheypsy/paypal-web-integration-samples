@@ -5,6 +5,7 @@ import svgrPlugin from 'vite-plugin-svgr'
 
 const config = defineConfig({
     build: {
+        root: 'client/src',
         // Opt for the fastest build
         target: 'esnext',
         minify: true,
@@ -15,7 +16,7 @@ const config = defineConfig({
     },
 
     test: {
-        root: 'client',
+        root: 'client/test',
         /*
         browser: {
             enabled: true,

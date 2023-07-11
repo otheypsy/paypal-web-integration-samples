@@ -1,10 +1,7 @@
-import React, { useContext, useState } from 'react'
-import { OutputJson } from 'pp-framework-react'
-import BraintreeVaultService from '../../../../services/BraintreeVaultService.jsx'
-import BraintreeTransactionsService from '../../../../services/BraintreeTransactionsService.jsx'
-import AppContext from '../../../../../../context/AppContext'
-import BusyContext from '../../../../../../context/BusyContext'
-import OutputContext from '../../../../../../context/OutputContext'
+import { useState } from 'react'
+import { OutputJson } from '../../../../../../lib/components/export.jsx'
+import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
+import { useAddOutput } from '../../../../../../states/Output/output.hooks.jsx'
 
 const _parameters = {
     deviceData: 'DEVICE_DATA_STRING',
@@ -18,27 +15,28 @@ const _parameters = {
 }
 
 const Sale = (props) => {
-    const braintreeContext = useContext(AppContext)
-    const busyContext = useContext(BusyContext)
+    const addBusy = useAddBusy()
+    const removeBusy = useRemoveBusy()
+    const addOutput = useAddOutput()
     const [parameters, setParameters] = useState(_parameters)
 
     const createTransaction = async () => {
-        busyContext.addBusy('btVaultPayment')
+        addBusy()
         const response = await BraintreeTransactionsService.sale(props.integration, {
             ...parameters,
             deviceData: braintreeContext.context.deviceData,
         })
-        busyContext.removeBusy('btVaultPayment')
-        props.onOutput(response, 'VaultPayment')
+        removeBusy()
+        addOutput(response, 'VaultPayment')
     }
 
     const onChangeParameters = (value) => setParameters(value)
 
     return (
-        <React.Fragment>
+        <>
             <div className="row">
                 <div className="col-8">
-                    <OutputJson content={parameters} isEditable={true} onChange={onChangeParameters} />
+                    <OutputJson src={parameters} isEditable={true} onChange={onChangeParameters} />
                 </div>
                 <div className="col-4">
                     <button className="btn btn-outline-success" onClick={createTransaction}>
@@ -46,7 +44,7 @@ const Sale = (props) => {
                     </button>
                 </div>
             </div>
-        </React.Fragment>
+        </>
     )
 }
 

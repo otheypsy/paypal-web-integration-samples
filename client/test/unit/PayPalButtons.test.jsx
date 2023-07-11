@@ -1,7 +1,7 @@
 import { beforeAll, beforeEach, afterAll, expect, describe, it } from 'vitest'
 import { render, cleanup } from '@testing-library/react'
 import { loadScript } from '../../src/utils/dom.utils.jsx'
-import PayPalButtons from '../../src/features/PayPalButtons.jsx'
+import PayPalButtons from '../../src/features/PayPalButtons.components.jsx'
 
 describe('PayPalButtons test', async () => {
     beforeAll(async () => {

@@ -1,34 +1,33 @@
-import React, { useContext, useState } from 'react'
-import { OutputJson } from 'pp-framework-react'
+import { useState } from 'react'
+import { OutputJson } from '../../../../../../lib/components/export.jsx'
 import BraintreeVaultService from '../../../../services/BraintreeVaultService.jsx'
-import BusyContext from '../../../../../../context/BusyContext'
+import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
 
 const Update = (props) => {
-    const busyContext = useContext(BusyContext)
+    const addBusy = useAddBusy()
+    const removeBusy = useRemoveBusy()
     const [postData, setPostData] = useState(BraintreeVaultService.postData.update)
 
     const onChangePostData = (value) => setPostData(value)
 
     const updateVault = async () => {
-        busyContext.addBusy('btVaultUpdate')
+        addBusy()
         const response = await BraintreeVaultService.update(props.integration, postData)
-        busyContext.removeBusy('btVaultUpdate')
+        removeBusy()
         props.onOutput(response, 'VaultUpdate')
     }
 
     return (
-        <React.Fragment>
-            <div className="row">
-                <div className="col-8">
-                    <OutputJson content={postData} isEditable={true} onChange={onChangePostData} />
-                </div>
-                <div className="col-4">
-                    <button className="btn btn-outline-warning" onClick={updateVault}>
-                        Update
-                    </button>
-                </div>
+        <div className="row">
+            <div className="col-8">
+                <OutputJson src={postData} isEditable={true} onChange={onChangePostData} />
             </div>
-        </React.Fragment>
+            <div className="col-4">
+                <button className="btn btn-outline-warning" onClick={updateVault}>
+                    Update
+                </button>
+            </div>
+        </div>
     )
 }
 

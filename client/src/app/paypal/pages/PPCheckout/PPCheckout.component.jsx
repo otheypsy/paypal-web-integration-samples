@@ -1,13 +1,11 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import withOperations from '../../../../layouts/withOperations.component.jsx'
-import PayPalOrdersService from '../../services/PayPalOrdersService.jsx'
-import { Card, OutputJson, BusyIndicator } from '../../../../lib/components/export.jsx'
 import createLoggers from '../../../../utils/logger.utils.jsx'
 import { useAddBusy, useRemoveBusy } from '../../../../states/Busy/busy.hooks.jsx'
-import { useAddOutput } from '../../../../states/Output/output.hooks.jsx'
+// import { useAddOutput } from '../../../../states/Output/output.hooks.jsx'
 import { useSetError } from '../../../../states/Error/error.hooks.jsx'
-import { useAddAppContext } from '../../../../states/AppContext/appContext.hooks.jsx'
-import { loadPPScript } from '../../../../services/paypal.service.jsx'
+import { loadPPScript, restInterface } from '../../../../services/paypal.service.jsx'
+import PayPalButtons from '../../../../features/PayPalButtons.components.jsx'
 
 const { log, error } = createLoggers('PPCheckout.component.jsx')
 
@@ -54,46 +52,54 @@ const _operations = {
 const PPCheckout = (props) => {
     const addBusy = useAddBusy()
     const removeBusy = useRemoveBusy()
-    const addOutput = useAddOutput()
+    // const addOutput = useAddOutput()
     const setError = useSetError()
-    const addAppContext = useAddAppContext()
 
-    const ppContainer = useRef(undefined)
-
-    const [order] = useState()
-
-    const renderPayPalButtons = () => {
-        setIsBusy(true)
-        if (!window.hasOwnProperty('PP') || !window.PP.hasOwnProperty('paypal'))
-            return console.error('Unable to load PayPal Checkout SDK - JSV5')
-        window.PP.paypal
-            .Buttons({
-                createOrder: async () => {
-                    setIsBusy(true)
-                    const orderData = await PayPalOrdersService.orders.create(order)
-                    setResponse(orderData)
-                    setIsBusy(false)
-                    return orderData.id
-                },
-
-                onApprove: async (data) => {
-                    setIsBusy(true)
-                    const executeData = await PayPalOrdersService.orders.execute(data.orderID)
-                    setResponse(executeData)
-                    setIsBusy(false)
-                },
-            })
-            .render('#paypalCheckoutDiv')
-            .then(() => {
-                setIsBusy(false)
-            })
-    }
+    const [ppConfig, setPPConfig] = useState(undefined)
 
     const loadPayPalSDK = async () => {
         addBusy()
-        log(props.operations)
         const { options, dataAttributes } = props.operations.loadPayPalSDK.data
         await loadPPScript(options, dataAttributes)
+        removeBusy()
+    }
+
+    const renderPayPalButtons = () => {
+        addBusy()
+        if (!window?.paypal?.Buttons) return error('renderPayPalButtons', 'Unable to load PayPal Checkout SDK')
+        setPPConfig({
+            createOrder: async () => {
+                addBusy()
+                let response = undefined
+                try {
+                    response = await restInterface(
+                        props.operations.createOrder.data.uri,
+                        props.operations.createOrder.data.method,
+                        props.operations.createOrder.data.body,
+                    )
+                    log('createOrder', response)
+                } catch (e) {
+                    setError()
+                    error('createOrder', e)
+                }
+                removeBusy()
+                return response?.id
+            },
+
+            onApprove: async (data) => {
+                addBusy()
+                try {
+                    log('onApprove', data)
+                    // const response = await ppInstance.tokenizePayment(data)
+                    // log('executeOrder', response)
+                    // addOutput('ExecuteOrder', response)
+                } catch (e) {
+                    setError()
+                    error('onApprove', e)
+                }
+                removeBusy()
+            },
+        })
         removeBusy()
     }
 
@@ -110,7 +116,9 @@ const PPCheckout = (props) => {
             <button className="btn btn-outline-success" onClick={renderPayPalButtons}>
                 Execute Order
             </button>
-            <div ref={ppContainer} />
+            <br />
+            <br />
+            <PayPalButtons ppConfig={ppConfig} fundingSources={['paypal']} />
         </>
     )
 }

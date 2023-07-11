@@ -1,4 +1,4 @@
-import routes1 from './GraphQLCharge/gql.charge.routes'
+import routes1 from './GQLCharge/gql.charge.routes'
 
 const routes = [...routes1]
 

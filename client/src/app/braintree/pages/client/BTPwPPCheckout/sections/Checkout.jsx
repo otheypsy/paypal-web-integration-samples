@@ -139,10 +139,10 @@ const Checkout = (props) => {
                 let response = undefined
                 try {
                     response = await ppInstance.createPayment(props.operations.createPayment.data.options)
-                    log('PayPalCheckout: createOrder', response)
+                    log('createOrder', response)
                 } catch (error) {
                     setError()
-                    danger('PayPalCheckout: createOrder', error)
+                    danger('createOrder', error)
                 }
                 removeBusy()
                 return response
@@ -151,14 +151,14 @@ const Checkout = (props) => {
             onApprove: async (data) => {
                 addBusy()
                 try {
-                    log('PayPalCheckout: onApprove', data)
+                    log('onApprove', data)
                     const response = await ppInstance.tokenizePayment(data)
-                    log('PayPalCheckout: tokenizePayment', response)
+                    log('tokenizePayment', response)
                     addOutput('TokenizePayment', response)
                     setNonce(response.nonce)
                 } catch (error) {
                     setError()
-                    danger('PayPalCheckout: onApprove', error)
+                    danger('onApprove', error)
                 }
                 removeBusy()
             },

@@ -11,11 +11,13 @@ const _operationsReducer = {
             ...state,
             [action.id]: {
                 ...state[action.id],
-                data: action.value,
+                data: action.data,
             },
         }
     },
-    init: (operations) => operations,
+    init: (operations) => {
+        return operations
+    },
 }
 
 const withOperations = (BaseComponent, initOperations, requiredContext = []) => {
@@ -27,10 +29,11 @@ const withOperations = (BaseComponent, initOperations, requiredContext = []) => 
             _operationsReducer.init,
         )
 
-        const updateOperations = (id, value) => {
+        const updateOperation = (id, data) => {
+            console.log(id, data)
             dispatchOperations({
                 id: id,
-                value: value,
+                data: data,
             })
         }
 
@@ -62,12 +65,12 @@ const withOperations = (BaseComponent, initOperations, requiredContext = []) => 
                             key={operationId}
                             operationId={operationId}
                             operation={operations[operationId]}
-                            onChange={updateOperations}
+                            onChange={updateOperation}
                         />
                     ))}
                 </div>
                 <div className="col-4">
-                    <BaseComponent {...props} operations={operations} />
+                    <BaseComponent {...props} operations={operations} updateOperation={updateOperation} />
                 </div>
             </div>
         )

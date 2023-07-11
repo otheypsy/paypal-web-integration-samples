@@ -15,6 +15,11 @@ const routes = [
         element: lazy(() => import('../layouts/AppLayout.component.jsx')),
         children: ppRoutes,
     },
+    {
+        label: 'YOLO',
+        path: 'yolo',
+        element: lazy(() => import('./yolo/Yolo.jsx')),
+    },
 ]
 
 export default routes

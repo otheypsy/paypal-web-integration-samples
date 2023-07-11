@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import createLoggers from '../../../../../../utils/logger.utils.jsx'
 import withOperations from '../../../../../../layouts/withOperations.component.jsx'
 import { clientInterface, serverInterface } from '../../../../../../services/bt.service.jsx'
@@ -23,7 +22,7 @@ const _operations = {
             },
         },
     },
-    clientCreate: {
+    createClientInstance: {
         label: 'braintree-web.client.create()',
         type: 'client',
         data: {
@@ -41,8 +40,6 @@ const ClientToken = (props) => {
     const setError = useSetError()
     const addAppContext = useAddAppContext()
 
-    const [clientToken, setClientToken] = useState('')
-
     const createClientToken = async () => {
         addBusy()
         try {
@@ -50,12 +47,14 @@ const ClientToken = (props) => {
                 'clientToken',
                 'generate',
                 [],
-                props.operations.clientTokenGenerate.data.parameters,
+                props.operations.createClientToken.data.parameters,
             )
             log('createClientToken', response)
             addOutput('ClientToken', response)
             if (!response?.clientToken) throw Error('Response does not contain client token')
-            setClientToken(response.clientToken)
+            const newData = props.operations.createClientInstance.data
+            newData.options.authorization = response.clientToken
+            props.updateOperation('createClientInstance', newData)
         } catch (e) {
             setError()
             error(e)
@@ -66,10 +65,7 @@ const ClientToken = (props) => {
     const createClientInstance = async () => {
         addBusy()
         try {
-            const clientInstance = await clientInterface('Client', {
-                ...props.operations.clientCreate.data.options,
-                authorization: clientToken,
-            })
+            const clientInstance = await clientInterface('Client', props.operations.createClientInstance.data.options)
             log('createClientInstance', clientInstance)
             addOutput('ClientInstance', clientInstance)
             if (clientInstance) addAppContext('clientInstance', clientInstance)

@@ -18,8 +18,7 @@ const DataEdit = (props) => {
 
         case typeof props.data === 'string' && props.data.split(/\r\n|\r|\n/).length > 1: {
             const rows = props.data.split(/\r\n|\r|\n/).length
-            console.log(rows)
-            return <InputBody label={props.dataId} onChange={onChange} rows={30} value={props.data} />
+            return <InputBody label={props.dataId} onChange={onChange} rows={rows} value={props.data} />
         }
 
         case typeof props.data === 'string': {

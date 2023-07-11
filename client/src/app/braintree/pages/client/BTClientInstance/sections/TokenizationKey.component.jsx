@@ -7,7 +7,7 @@ import { useSetError } from '../../../../../../states/Error/error.hooks.jsx'
 import { useAddOutput } from '../../../../../../states/Output/output.hooks.jsx'
 import { useAddAppContext } from '../../../../../../states/AppContext/appContext.hooks.jsx'
 
-const { log, error } = createLoggers('ClientToken.component.jsx')
+const { log, error } = createLoggers('TokenizationKey.component.jsx')
 
 const _operations = {
     clientCreate: {
@@ -32,12 +32,12 @@ const TokenizationKey = (props) => {
         addBusy()
         try {
             const clientInstance = await clientInterface('Client', props.operations.clientCreate.data.options)
-            log('TokenizationKey: createClientInstance', clientInstance)
+            log('createClientInstance', clientInstance)
             addOutput('ClientInstance', clientInstance)
             if (clientInstance) addAppContext('clientInstance', clientInstance)
         } catch (e) {
             setError()
-            error('TokenizationKey: createClientInstance', e)
+            error(e)
         }
         removeBusy()
     }

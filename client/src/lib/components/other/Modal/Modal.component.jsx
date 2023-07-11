@@ -1,20 +1,23 @@
-import { useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Modal as BSModal } from 'bootstrap';
+import { useRef, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import { Modal as BootstrapModal } from 'bootstrap'
 
 const Modal = (props) => {
-
-    const modalRef = useRef(undefined);
-
-    useEffect(() => {
-        const ref = modalRef.current;
-        new BSModal(ref);
-        ref.addEventListener('hidden.bs.modal', props.onClose)
-    }, [])
+    const modalRef = useRef(undefined)
 
     useEffect(() => {
-        const modalInstance = BSModal.getInstance(modalRef.current);
-        props.isOpen ? modalInstance.show() : modalInstance.hide();
+        const modal = modalRef.current
+        BootstrapModal.getOrCreateInstance(modal)
+        modal.addEventListener('hidden.bs.modal', props.onClose)
+
+        return () => {
+            modal.removeEventListener('hidden.bs.modal', props.onClose)
+        }
+    }, [props.onClose])
+
+    useEffect(() => {
+        const modalInstance = BootstrapModal.getInstance(modalRef.current)
+        props.isOpen ? modalInstance.show() : modalInstance.hide()
     }, [props.isOpen])
 
     return (
@@ -28,18 +31,18 @@ const Modal = (props) => {
                                 <span className="fas fa-times" />
                             </button>
                         </div>
-                        <div className="modal-body">
-                            {props.children}
-                        </div>
+                        <div className="modal-body">{props.children}</div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-outline-secondary" onClick={props.onClose}>Close</button>
+                            <button type="button" className="btn btn-outline-secondary" onClick={props.onClose}>
+                                Close
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </>
     )
-};
+}
 
 Modal.propTypes = {
     /** Title of the modal */
@@ -49,13 +52,13 @@ Modal.propTypes = {
     /** Check if model is open */
     isOpen: PropTypes.bool.isRequired,
     /** Callback function for modal close */
-    onClose: PropTypes.func.isRequired
-};
+    onClose: PropTypes.func.isRequired,
+}
 
 Modal.defaultProps = {
     title: 'Modal Title',
     content: null,
-    isOpen: false
-};
+    isOpen: false,
+}
 
-export default Modal;
+export default Modal
