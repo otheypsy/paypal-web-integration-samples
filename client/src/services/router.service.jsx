@@ -7,7 +7,7 @@ const createLinks = (children) => {
         return {
             path: child.path,
             label: child.label,
-            data: child.data,
+            tag: child.tag,
         }
     })
 }
@@ -68,17 +68,13 @@ const createRoutes = (routes, basePath = '/') => {
     return finalRoutes
 }
 
-const mapPageRoutes = (routes, pageTag) => {
+const tagPageRoutes = (routes, tag) => {
     return routes.map((route) => {
-        const tags = [pageTag, ...(route?.data?.tags ? route.data.tags : [])]
         return {
             ...route,
-            data: {
-                ...route.data,
-                tags: [...new Set(tags)],
-            },
+            tag: tag,
         }
     })
 }
 
-export { createRoutes, createLinks, mapPageRoutes }
+export { createRoutes, createLinks, tagPageRoutes }

@@ -1,12 +1,12 @@
-import { mapPageRoutes } from '../../services/router.service.jsx'
-import graphqlRoutes from './pages/graphql/gql.routes.jsx'
+import { tagPageRoutes } from '../../services/router.service.jsx'
+import graphqlRoutes from './pages/gql/bt.gql.routes.jsx'
 import clientRoutes from './pages/client/bt.client.routes.jsx'
-// import serverRoutes from './pages/server/BtDataCollectorRoutes';
+import serverRoutes from './pages/server/bt.server.routes.jsx'
 
 const routes = [
-    ...mapPageRoutes(graphqlRoutes, 'graphql'),
-    ...mapPageRoutes(clientRoutes, 'client'),
-    //..._mapPageRoutes(serverRoutes, 'server')
+    ...tagPageRoutes(clientRoutes, 'client'),
+    ...tagPageRoutes(graphqlRoutes, 'gql'),
+    ...tagPageRoutes(serverRoutes, 'server'),
 ]
 
 export default routes

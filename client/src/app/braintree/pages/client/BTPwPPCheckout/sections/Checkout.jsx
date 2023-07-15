@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { useState, useRef } from 'react'
 import BTPayPalCheckout from 'braintree-web/paypal-checkout'
-import withOperations from '../../../../../../layouts/withOperations.component.jsx'
+import withOperations from '../../../../../../layouts/withOperations.hoc.jsx'
 import { serverInterface } from '../../../../../../services/bt.service.jsx'
 import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
 import { useAddOutput } from '../../../../../../states/Output/output.hooks.jsx'

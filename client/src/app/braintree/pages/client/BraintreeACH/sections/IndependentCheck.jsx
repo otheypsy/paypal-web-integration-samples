@@ -1,9 +1,13 @@
-import { useState, useContext } from 'react'
-import withOperations from '../../../../../../layouts/withOperations.component.jsx'
-import { clientInterface, serverInterface } from '../../../../../../services/bt.service.jsx'
-import { useAppContext } from '../../../../../../context/AppContext'
-import { useOutputContext } from '../../../../../../context/OutputContext'
-import { useBusyContext } from '../../../../../../context/BusyContext'
+import { useState } from 'react'
+import withOperations from '../../../../../../layouts/withOperations.hoc.jsx'
+import { clientInterface } from '../../../../../../services/bt.service.jsx'
+import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
+import { useAddOutput } from '../../../../../../states/Output/output.hooks.jsx'
+import { useSetError } from '../../../../../../states/Error/error.hooks.jsx'
+import { useAppContext } from '../../../../../../states/AppContext/appContext.hooks.jsx'
+import createLoggers from '../../../../../../utils/logger.utils.jsx'
+
+const { log, error } = createLoggers('IndependentCheck.component.jsx')
 
 const _operations = {
     createACHInstance: {
@@ -42,49 +46,41 @@ const _operations = {
 }
 
 const IndependentCheck = (props) => {
+    const addBusy = useAddBusy()
+    const removeBusy = useRemoveBusy()
+    const addOutput = useAddOutput()
+    const setError = useSetError()
     const appContext = useAppContext()
-    const busyContext = useContext(BusyContext)
-    const outputContext = useContext(OutputContext)
     const [usBankAccountInstance, setUSBankAccountInstance] = useState(null)
 
     const createACHInstance = async () => {
-        busyContext.add()
+        addBusy()
         try {
             const response = await clientInterface('USBankAccount', {
                 ...props.operations.createACHInstance.data.options,
-                client: appContext.get('clientInstance'),
+                client: appContext.clientInstance,
             })
-            outputContext.add('USBankAccountInstance', response)
+            log('createACHInstance', response)
+            addOutput('USBankAccountInstance', response)
             setUSBankAccountInstance(response)
-        } catch (error) {
-            console.error(error)
+        } catch (e) {
+            setError()
+            error(e)
         }
-        busyContext.remove()
+        removeBusy()
     }
 
     const tokenizeACH = async () => {
-        const response = serverInterface('customer', 'create', [], {
-            id: '<<XPERI_TOKEN_HERE>>',
-            firstName: 'Omkar',
-            lastName: 'Desai',
-            creditCard: {
-                token: '<<XPERI_TOKEN_HERE>>',
-                cardholderName: 'Omkar Desai',
-                number: '4217651111111119',
-                expirationMonth: '04',
-                expirationYear: '29',
-            },
-        })
-
-        busyContext.add()
+        addBusy()
         try {
             const response = await usBankAccountInstance.tokenize(props.operations.tokenizeACH.data.options)
-            outputContext.add('TokenizeUSBankAccount', response)
-        } catch (error) {
-            console.error(error)
-            outputContext.add('TokenizeUSBankAccount', error)
+            log('tokenizeACH', response)
+            addOutput('TokenizeUSBankAccount', response)
+        } catch (e) {
+            setError()
+            error(e)
         }
-        busyContext.remove()
+        removeBusy()
     }
 
     return (
@@ -97,8 +93,6 @@ const IndependentCheck = (props) => {
             <button className="btn btn-outline-success" onClick={tokenizeACH}>
                 Tokenize Bank Details
             </button>
-            <br />
-            <br />
         </>
     )
 }

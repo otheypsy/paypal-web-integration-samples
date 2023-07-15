@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import withOperations from '../../../../../../layouts/withOperations.component.jsx'
+import withOperations from '../../../../../../layouts/withOperations.hoc.jsx'
 import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
 import { useAddOutput } from '../../../../../../states/Output/output.hooks.jsx'
 import { useSetError } from '../../../../../../states/Error/error.hooks.jsx'

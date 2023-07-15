@@ -10,9 +10,10 @@ const PageLayout = (props) => {
             <h3>{props.label}</h3>
             <hr />
             <Nav onClick={navigate}>
-                {props.links.map((link) => (
-                    <LinkWrapper key={link.path} to={link.path} label={link.label} onClick={navigate} />
-                ))}
+                {props.links &&
+                    props.links.map((link) => (
+                        <LinkWrapper key={link.path} to={link.path} label={link.label} onClick={navigate} />
+                    ))}
             </Nav>
             <Outlet />
         </>

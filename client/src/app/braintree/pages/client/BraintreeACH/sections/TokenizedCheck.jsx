@@ -1,9 +1,13 @@
-import React, { useState, useContext } from 'react'
-import AppContext from '../../../../../../context/AppContext'
-import BusyContext from '../../../../../../context/BusyContext'
-import OutputContext from '../../../../../../context/OutputContext'
-import withOperations from '../../../../../../layouts/withOperations.component.jsx'
+import { useState } from 'react'
+import withOperations from '../../../../../../layouts/withOperations.hoc.jsx'
 import { clientInterface } from '../../../../../../services/bt.service.jsx'
+import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
+import { useAddOutput } from '../../../../../../states/Output/output.hooks.jsx'
+import { useSetError } from '../../../../../../states/Error/error.hooks.jsx'
+import { useAppContext } from '../../../../../../states/AppContext/appContext.hooks.jsx'
+import createLoggers from '../../../../../../utils/logger.utils.jsx'
+
+const { log, error } = createLoggers('TokenizedCheck.component.jsx')
 
 const _operations = {
     createACHInstance: {
@@ -40,39 +44,45 @@ const _operations = {
 }
 
 const TokenizedCheck = (props) => {
-    const appContext = useContext(AppContext)
-    const busyContext = useContext(BusyContext)
-    const outputContext = useContext(OutputContext)
+    const addBusy = useAddBusy()
+    const removeBusy = useRemoveBusy()
+    const addOutput = useAddOutput()
+    const setError = useSetError()
+    const appContext = useAppContext()
     const [usBankAccountInstance, setUSBankAccountInstance] = useState(null)
 
     const createACHInstance = async () => {
-        busyContext.add()
+        addBusy()
         try {
             const response = await clientInterface('USBankAccount', {
                 ...props.operations.createACHInstance.data.options,
-                client: appContext.get('clientInstance'),
+                client: appContext.clientInstance,
             })
-            outputContext.add('USBankAccountInstance', response)
+            log('createACHInstance', response)
+            addOutput('USBankAccountInstance', response)
             setUSBankAccountInstance(response)
-        } catch (error) {
-            console.error(error)
+        } catch (e) {
+            setError()
+            error(e)
         }
-        busyContext.remove()
+        removeBusy()
     }
 
     const tokenizeACH = async () => {
-        busyContext.add()
+        addBusy()
         try {
             const response = await usBankAccountInstance.tokenize(props.operations.tokenizeACH.data.options)
-            outputContext.add('TokenizeUSBankAccount', response)
-        } catch (error) {
-            outputContext.add('TokenizeUSBankAccount', error)
+            log('tokenizeACH', response)
+            addOutput('TokenizeUSBankAccount', response)
+        } catch (e) {
+            setError()
+            error(e)
         }
-        busyContext.remove()
+        removeBusy()
     }
 
     return (
-        <React.Fragment>
+        <>
             <button className="btn btn-outline-success" onClick={createACHInstance}>
                 Create ACH Instance
             </button>
@@ -81,9 +91,7 @@ const TokenizedCheck = (props) => {
             <button className="btn btn-outline-success" onClick={tokenizeACH}>
                 Tokenize Bank Details
             </button>
-            <br />
-            <br />
-        </React.Fragment>
+        </>
     )
 }
 

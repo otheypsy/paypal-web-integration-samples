@@ -11,7 +11,7 @@ describe('jsonRequest - Success', () => {
     it('should run http GET', async () => {
         expect.assertions(2)
 
-        const response = await jsonRequest.get('https://httpbin.org/get')
+        const response = await jsonRequest('https://httpbin.org/get', 'GET')
 
         expect(response.ok).toBeTruthy()
         expect(response.status).toBe(200)
@@ -20,7 +20,7 @@ describe('jsonRequest - Success', () => {
     it('should run http POST', async () => {
         expect.assertions(3)
 
-        const response = await jsonRequest.post('https://httpbin.org/post', mockBody)
+        const response = await jsonRequest('https://httpbin.org/post', 'POST', mockBody)
         const json = await response.json()
 
         expect(response.ok).toBeTruthy()
@@ -31,7 +31,7 @@ describe('jsonRequest - Success', () => {
     it('should run http PATCH', async () => {
         expect.assertions(3)
 
-        const response = await jsonRequest.patch('https://httpbin.org/patch', mockBody)
+        const response = await jsonRequest('https://httpbin.org/patch', 'PATCH', mockBody)
         const json = await response.json()
 
         expect(response.ok).toBeTruthy()
@@ -42,7 +42,7 @@ describe('jsonRequest - Success', () => {
     it('should run http DELETE', async () => {
         expect.assertions(3)
 
-        const response = await jsonRequest.delete('https://httpbin.org/delete', mockBody)
+        const response = await jsonRequest('https://httpbin.org/delete', 'DELETE', mockBody)
         const json = await response.json()
 
         expect(response.ok).toBeTruthy()
@@ -55,8 +55,7 @@ describe('jsonRequest - Failed', () => {
     it('should throw error', async () => {
         expect.assertions(1)
 
-        const response = jsonRequest.get('https://httpbin.org/status/400')
-
-        await expect(response).rejects.toThrow('HTTP Fetch Failed')
+        const request = jsonRequest('https://httpbin.org/status/400', 'GET')
+        await expect(request).rejects.toThrow('HTTP Fetch Failed')
     })
 })

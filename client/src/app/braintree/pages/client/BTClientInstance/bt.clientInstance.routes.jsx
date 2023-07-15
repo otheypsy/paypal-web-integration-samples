@@ -17,9 +17,6 @@ const routes = [
                 element: lazy(() => import('./sections/TokenizationKey.component.jsx')),
             },
         ],
-        data: {
-            tags: ['server'],
-        },
     },
 ]
 

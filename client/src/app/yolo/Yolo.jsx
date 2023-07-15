@@ -1,4 +1,4 @@
-import withOperations from '../../layouts/withOperations.component.jsx'
+import withOperations from '../../layouts/withOperations.hoc.jsx'
 
 const _operations = {
     clientTokenGenerate: {

@@ -2,6 +2,7 @@ import BTClient from 'braintree-web/client'
 import BTPayPalCheckout from 'braintree-web/paypal-checkout'
 import BTUSBankAccount from 'braintree-web/us-bank-account'
 import BTDataCollector from 'braintree-web/data-collector'
+import BTThreeDSecure from 'braintree-web/three-d-secure'
 import createLoggers from '../utils/logger.utils.jsx'
 import { jsonRequest } from '../utils/http.utils.jsx'
 
@@ -12,6 +13,7 @@ const _clientMapping = {
     PayPalCheckout: BTPayPalCheckout,
     USBankAccount: BTUSBankAccount,
     DataCollector: BTDataCollector,
+    ThreeDSecure: BTThreeDSecure,
 }
 
 const clientInterface = async (className, options) => {
@@ -22,7 +24,7 @@ const clientInterface = async (className, options) => {
     return _clientMapping[className].create(options)
 }
 
-const serverInterface = async (resource, operation, args = [], params = []) => {
+const serverInterface = async (resource, operation, args = [], params = {}) => {
     const url = '/api/braintree/sdk/interface'
     const headers = localStorage.getItem('authHeader')
         ? {
@@ -36,7 +38,8 @@ const serverInterface = async (resource, operation, args = [], params = []) => {
         params: params,
     }
 
-    return await jsonRequest.post(url, postData, headers)
+    const response = await jsonRequest(url, 'POST', postData, headers)
+    return response.json()
 }
 
 const gqlInterface = async (query, mutation) => {

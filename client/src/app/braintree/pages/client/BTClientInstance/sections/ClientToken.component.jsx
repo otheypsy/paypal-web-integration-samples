@@ -1,5 +1,5 @@
 import createLoggers from '../../../../../../utils/logger.utils.jsx'
-import withOperations from '../../../../../../layouts/withOperations.component.jsx'
+import withOperations from '../../../../../../layouts/withOperations.hoc.jsx'
 import { clientInterface, serverInterface } from '../../../../../../services/bt.service.jsx'
 import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'
 import { useSetError } from '../../../../../../states/Error/error.hooks.jsx'
@@ -13,9 +13,6 @@ const _operations = {
         label: 'gateway.clientToken.generate()',
         type: 'server',
         data: {
-            uri: 'test',
-            uri1: 'test',
-            headers: [],
             parameters: {
                 // customerId: '839327792',
                 merchantAccountId: 'odesai_USD',

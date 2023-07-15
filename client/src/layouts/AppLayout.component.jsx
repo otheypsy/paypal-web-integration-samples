@@ -27,9 +27,7 @@ const AppLayout = (props) => {
     useEffect(() => {
         const tagFilter = {}
         props.links.forEach((link) => {
-            link.data?.tags.forEach((tag) => {
-                tagFilter[tag] = false
-            })
+            if (link.tag) tagFilter[link.tag] = false
         })
         setLabelFilter('')
         setTagFilter(tagFilter)
@@ -43,9 +41,9 @@ const AppLayout = (props) => {
         setTagFilter(newTagFilter)
     }
 
-    const filterTags = (tags) => {
+    const filterTag = (routeTag) => {
         return Object.keys(tagFilter).every((tag) => {
-            return !(tagFilter[tag] && !tags.includes(tag))
+            return !(tagFilter[tag] && routeTag !== tag)
         })
     }
 
@@ -55,11 +53,12 @@ const AppLayout = (props) => {
 
     const onLinkClick = (to) => navigate(to)
 
-    const onTagClick = (label) => {
-        setTagFilter({
-            ...tagFilter,
-            [label]: !tagFilter[label],
-        })
+    const onTagClick = (clickedTag) => {
+        const newTagFilter = {}
+        for (const tag in tagFilter) {
+            newTagFilter[tag] = tag === clickedTag
+        }
+        setTagFilter(newTagFilter)
     }
 
     return (
@@ -77,13 +76,14 @@ const AppLayout = (props) => {
                     <br />
                     <div className="list-group p-2">
                         {props.links.map((link) => {
-                            const isVisible = filterTags(link.data?.tags || []) && filterLabel(link.label)
+                            const isVisible = filterTag(link.tag) && filterLabel(link.label)
                             return (
                                 <AppLink
                                     key={link.path}
                                     to={link.path}
                                     label={link.label}
                                     isVisible={isVisible}
+                                    tag={link.tag}
                                     onClick={onLinkClick}
                                 />
                             )

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import withOperations from '../../../../layouts/withOperations.component.jsx'
+import withOperations from '../../../../layouts/withOperations.hoc.jsx'
 import createLoggers from '../../../../utils/logger.utils.jsx'
 import { useAddBusy, useRemoveBusy } from '../../../../states/Busy/busy.hooks.jsx'
 // import { useAddOutput } from '../../../../states/Output/output.hooks.jsx'

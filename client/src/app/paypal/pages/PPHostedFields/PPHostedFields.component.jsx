@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Card, OutputJson } from '../../../../lib/components/export.jsx'
 import AppService from '../../../../services/app.service.jsx'
 import createLoggers from '../../../../utils/logger.utils.jsx'
-import withOperations from '../../../../layouts/withOperations.component.jsx'
+import withOperations from '../../../../layouts/withOperations.hoc.jsx'
 import { useAddBusy, useRemoveBusy } from '../../../../states/Busy/busy.hooks.jsx'
 
 const { log, error } = createLoggers('PPHostedFields.component.jsx')

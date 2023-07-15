@@ -24,7 +24,7 @@ const restInterface = async (uri, method, body = {}, apiHeaders = {}) => {
         body: body,
     }
 
-    return await jsonRequest[method.toLowerCase()](url, postData, authHeaders)
+    return await jsonRequest(url, method, postData, authHeaders)
 }
 
 export { loadPPScript, restInterface }

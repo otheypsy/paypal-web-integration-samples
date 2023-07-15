@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import withOperations from '../../../../../../layouts/withOperations.component.jsx'
+import withOperations from '../../../../../../layouts/withOperations.hoc.jsx'
 import createLoggers from '../../../../../../utils/logger.utils.jsx'
 import { clientInterface } from '../../../../../../services/bt.service.jsx'
 import { useAddBusy, useRemoveBusy } from '../../../../../../states/Busy/busy.hooks.jsx'

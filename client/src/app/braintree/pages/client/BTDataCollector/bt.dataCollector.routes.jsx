@@ -4,7 +4,14 @@ const routes = [
     {
         path: 'data-collector',
         label: 'Data Collector',
-        element: lazy(() => import('./BTDataCollector.component.jsx')),
+        element: lazy(() => import('../../../../../layouts/PageLayout.component.jsx')),
+        children: [
+            {
+                path: 'basic',
+                label: 'Basic',
+                element: lazy(() => import('./sections/BasicDataCollector.component.jsx')),
+            },
+        ],
     },
 ]
 
