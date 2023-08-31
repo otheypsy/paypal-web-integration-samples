@@ -5,6 +5,7 @@
         "noImplicitAny": true,
         "strict": true,
         "allowJs": true,
-        "jsx": "react"
+        "jsx": "react",
+
     }
 }
