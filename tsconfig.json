@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "noImplicitAny": true,
+        "strict": true,
+        "allowJs": true,
+        "jsx": "react"
+    }
+}

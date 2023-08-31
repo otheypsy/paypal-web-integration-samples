@@ -1,0 +1,19 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/fontawesome.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/solid.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+
+@font-face {
+    font-display: swap;
+    font-family: PayPalOpen-Regular;
+    font-style: normal;
+    src: url(https://www.paypalobjects.com/paypal-ui/fonts/PayPalOpen-Regular.woff2) format('woff2'),
+        url(https://www.paypalobjects.com/paypal-ui/fonts/PayPalOpen-Regular.woff) format('woff');
+}
+
+@font-face {
+    font-display: swap;
+    font-family: PayPalOpen-Bold;
+    font-style: normal;
+    src: url(https://www.paypalobjects.com/paypal-ui/fonts/PayPalOpen-Bold.woff2) format('woff2'),
+        url(https://www.paypalobjects.com/paypal-ui/fonts/PayPalOpen-Bold.woff) format('woff');
+}

@@ -1,0 +1,13 @@
+@import '../../scss/constants';
+
+.label {
+    color: $--color-4;
+}
+
+.input {
+    &:focus {
+        border-color: $--color-1;
+        box-shadow: none;
+    }
+}
+

@@ -1,0 +1,11 @@
+name: Continuous Integration
+
+on:
+    push:
+        branches:
+            -   dev
+
+jobs:
+    test:
+        name: Test Application
+        uses: otheypsy/paypal-web-integration-samples/.github/workflows/validate.yml@main

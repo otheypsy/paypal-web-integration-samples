@@ -1,0 +1,17 @@
+.container {
+    position: fixed;
+    text-align: center;
+    background: radial-gradient(rgba(1, 1, 1, 0.4), rgba(1, 1, 1, 0.3));
+    z-index: 9999;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.group {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
